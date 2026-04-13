@@ -40,9 +40,13 @@ export async function proxy(request: NextRequest) {
 
   // IMPORTANT: getUser() must be called to refresh the session token.
   // Do NOT use getSession() here — it reads from cookie without server-side validation.
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
+  let user = null
+  try {
+    const { data } = await supabase.auth.getUser()
+    user = data.user
+  } catch {
+    // Supabase unavailable — fail open, let page-level auth handle it
+  }
 
   const { pathname } = request.nextUrl
 

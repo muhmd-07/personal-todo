@@ -1,0 +1,46 @@
+// Prisma Schema — Personal Todo
+// DB: Supabase (PostgreSQL via PgBouncer)
+// Auth: Supabase Auth — user IDs are UUIDs from auth.users
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  // Connection URLs moved to prisma.config.ts (Prisma v7 breaking change)
+  // See: prisma.config.ts for DATABASE_URL / DIRECT_URL configuration
+}
+
+// ─── Tasks ───────────────────────────────────────────────────────────────────
+
+model Task {
+  id          String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId      String    @map("user_id") @db.Uuid
+  title       String    @db.Text
+  dueDate     DateTime? @map("due_date") @db.Date
+  dueTime     DateTime? @map("due_time") @db.Time(6)
+  notes       String?   @db.Text
+  reminderTime DateTime? @map("reminder_time") @db.Timestamptz(6)
+  notifiedAt  DateTime? @map("notified_at") @db.Timestamptz(6)
+  completedAt DateTime? @map("completed_at") @db.Timestamptz(6)
+  deletedAt   DateTime? @map("deleted_at") @db.Timestamptz(6)
+  createdAt   DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt   DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@map("tasks")
+}
+
+// ─── Push Subscriptions ──────────────────────────────────────────────────────
+
+model PushSubscription {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId    String   @map("user_id") @db.Uuid
+  endpoint  String   @db.Text
+  // keys: { p256dh: string, auth: string } — stored as JSON
+  keys      Json     @db.Json
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  @@unique([userId, endpoint])
+  @@map("push_subscriptions")
+}

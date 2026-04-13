@@ -50,7 +50,7 @@ export async function registerAction(
   }
 
   const rateLimitResult = await checkRateLimit(`register:${parsed.data.email}`)
-  if (rateLimitResult) return rateLimitResult
+  if (rateLimitResult) return rateLimitResult as ActionResult<{ needsEmailVerification?: boolean }>
 
   const supabase = await createClient()
   const { data, error } = await supabase.auth.signUp({

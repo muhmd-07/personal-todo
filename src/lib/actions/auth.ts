@@ -8,7 +8,7 @@ import {
   ResetPasswordRequestSchema,
   ResetPasswordConfirmSchema,
 } from '@/lib/schemas/auth'
-import { authRatelimit } from '@/lib/ratelimit'
+import { getAuthRatelimit } from '@/lib/ratelimit'
 
 type ActionResult<T = null> =
   | { data: T; error: null }
@@ -16,7 +16,7 @@ type ActionResult<T = null> =
 
 async function checkRateLimit(identifier: string): Promise<ActionResult | null> {
   try {
-    const { success, reset } = await authRatelimit.limit(identifier)
+    const { success, reset } = await getAuthRatelimit().limit(identifier)
     if (!success) {
       const retryAfterSeconds = Math.ceil((reset - Date.now()) / 1000)
       return {

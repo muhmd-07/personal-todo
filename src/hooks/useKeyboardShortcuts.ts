@@ -4,13 +4,14 @@ import { useEffect } from 'react'
 
 interface ShortcutHandlers {
   onFocusInput: () => void
-  onSetView: (view: 'focus' | 'all') => void
+  onSetView: (view: 'focus' | 'calendar' | 'all') => void
 }
 
 /**
  * Global keyboard shortcuts:
  *   / or n  → focus the task input
  *   f       → switch to focus view
+ *   c       → switch to calendar view
  *   a       → switch to all-tasks view
  */
 export function useKeyboardShortcuts({
@@ -36,6 +37,9 @@ export function useKeyboardShortcuts({
           break
         case 'f':
           onSetView('focus')
+          break
+        case 'c':
+          onSetView('calendar')
           break
         case 'a':
           onSetView('all')

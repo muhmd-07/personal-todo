@@ -4,7 +4,7 @@ import type { Task } from '@/lib/types/task'
 
 interface TaskListProps {
   tasks: Task[]
-  view: 'focus' | 'all'
+  view: 'focus' | 'calendar' | 'all'
 }
 
 export function TaskList({ tasks, view }: TaskListProps) {

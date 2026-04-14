@@ -13,7 +13,7 @@ interface DashboardClientProps {
 }
 
 export function DashboardClient({ tasks, email }: DashboardClientProps) {
-  const [view, setView] = useState<'focus' | 'all'>('focus')
+  const [view, setView] = useState<'focus' | 'calendar' | 'all'>('focus')
   const inputRef = useRef<HTMLInputElement>(null)
 
   const handleFocusInput = useCallback(() => {

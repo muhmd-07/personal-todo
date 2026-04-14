@@ -2,6 +2,8 @@ import { createClient } from '@/lib/supabase/server'
 import { HomeClient } from '@/components/home/HomeClient'
 import type { Task } from '@/lib/types/task'
 
+export const revalidate = 30
+
 export default async function DashboardPage() {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()

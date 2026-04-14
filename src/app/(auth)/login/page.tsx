@@ -53,7 +53,7 @@ export default function LoginPage() {
             required
             aria-describedby={fieldErrors.email ? 'email-error' : undefined}
             aria-invalid={!!fieldErrors.email}
-            className="w-full rounded-lg border border-[var(--color-border)] bg-white px-3 py-2 text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-muted)] outline-none focus:border-[var(--color-accent)] focus:ring-2 focus:ring-[var(--color-accent)]/20 aria-invalid:border-red-400 aria-invalid:ring-red-400/20 transition"
+            className="w-full rounded-xl border border-[var(--color-border)] bg-gray-50/50 px-3.5 py-2.5 text-sm text-[var(--color-text-primary)] placeholder:text-gray-400 outline-none focus:border-violet-400 focus:ring-3 focus:ring-violet-500/10 focus:bg-white aria-invalid:border-red-400 aria-invalid:ring-red-400/20 transition-all duration-150"
             placeholder="you@example.com"
           />
           {fieldErrors.email && (
@@ -86,7 +86,7 @@ export default function LoginPage() {
             required
             aria-describedby={fieldErrors.password ? 'password-error' : undefined}
             aria-invalid={!!fieldErrors.password}
-            className="w-full rounded-lg border border-[var(--color-border)] bg-white px-3 py-2 text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-muted)] outline-none focus:border-[var(--color-accent)] focus:ring-2 focus:ring-[var(--color-accent)]/20 aria-invalid:border-red-400 aria-invalid:ring-red-400/20 transition"
+            className="w-full rounded-xl border border-[var(--color-border)] bg-gray-50/50 px-3.5 py-2.5 text-sm text-[var(--color-text-primary)] placeholder:text-gray-400 outline-none focus:border-violet-400 focus:ring-3 focus:ring-violet-500/10 focus:bg-white aria-invalid:border-red-400 aria-invalid:ring-red-400/20 transition-all duration-150"
             placeholder="Your password"
           />
           {fieldErrors.password && (
@@ -105,7 +105,7 @@ export default function LoginPage() {
         <button
           type="submit"
           disabled={isPending}
-          className="w-full rounded-lg bg-[var(--color-accent)] px-4 py-2 text-sm font-medium text-white hover:bg-[var(--color-accent-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition"
+          className="w-full rounded-xl bg-gradient-to-br from-violet-500 to-violet-700 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:from-violet-600 hover:to-violet-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-150"
         >
           {isPending ? 'Signing in…' : 'Sign in'}
         </button>

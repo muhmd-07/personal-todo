@@ -41,20 +41,20 @@ export function DashboardClient({ tasks, email }: DashboardClientProps) {
       <TaskInput inputRef={inputRef} />
 
       {showProgress && (
-        <div className="space-y-1.5">
-          <div className="flex items-center justify-between">
-            <span className="text-xs text-[var(--color-text-muted)]">
+        <div className="rounded-2xl border border-[var(--color-border)] bg-white px-4 py-3 shadow-[0_1px_3px_rgba(0,0,0,0.04)]">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-xs font-medium text-gray-600">
               {completedToday === 0
-                ? `${totalToday} task${totalToday !== 1 ? 's' : ''} to do today`
-                : completedToday === completedToday + totalToday
+                ? `${totalToday} task${totalToday !== 1 ? 's' : ''} remaining today`
+                : totalToday === 0
                 ? '🎉 All done for today!'
-                : `${completedToday} of ${completedToday + totalToday} done today`}
+                : `${completedToday} of ${completedToday + totalToday} completed`}
             </span>
-            <span className="text-xs font-medium text-[var(--color-accent)]">{progressPct}%</span>
+            <span className="text-xs font-bold text-[var(--color-accent)]">{progressPct}%</span>
           </div>
-          <div className="h-1.5 w-full rounded-full bg-zinc-100 overflow-hidden">
+          <div className="h-1.5 w-full rounded-full bg-gray-100 overflow-hidden">
             <div
-              className="h-full rounded-full bg-[var(--color-accent)] transition-all duration-500"
+              className="h-full rounded-full bg-gradient-to-r from-violet-500 to-violet-600 transition-all duration-700"
               style={{ width: `${progressPct}%` }}
             />
           </div>

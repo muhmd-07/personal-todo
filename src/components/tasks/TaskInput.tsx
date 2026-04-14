@@ -81,7 +81,7 @@ export function TaskInput({ inputRef: externalRef }: TaskInputProps = {}) {
   return (
     <div className="w-full">
       <form onSubmit={handleSubmit}>
-        <div className="relative flex items-center rounded-xl border border-[var(--color-border)] bg-white shadow-sm focus-within:border-[var(--color-accent)] focus-within:ring-2 focus-within:ring-[var(--color-accent)]/20 transition">
+        <div className="relative flex items-center rounded-2xl border border-[var(--color-border)] bg-white shadow-[0_1px_4px_rgba(0,0,0,0.06)] focus-within:border-violet-400 focus-within:ring-3 focus-within:ring-violet-500/10 transition-all duration-200">
           <input
             ref={inputRef}
             type="text"
@@ -91,13 +91,13 @@ export function TaskInput({ inputRef: externalRef }: TaskInputProps = {}) {
             aria-label="New task"
             autoComplete="off"
             spellCheck
-            className="flex-1 bg-transparent px-4 py-3 text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-muted)] outline-none"
+            className="flex-1 bg-transparent px-4 py-3.5 text-sm font-medium text-[var(--color-text-primary)] placeholder:text-gray-400 placeholder:font-normal outline-none"
           />
           <button
             type="submit"
             disabled={isPending || !value.trim()}
             aria-label="Add task"
-            className="mr-2 flex items-center justify-center size-8 rounded-lg bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)] disabled:opacity-40 disabled:cursor-not-allowed transition"
+            className="mr-2 flex items-center justify-center size-8 rounded-xl bg-gradient-to-br from-violet-500 to-violet-700 text-white shadow-sm hover:from-violet-600 hover:to-violet-800 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-150"
           >
             {isPending ? (
               <svg

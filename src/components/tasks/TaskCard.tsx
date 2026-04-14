@@ -80,14 +80,14 @@ export function TaskCard({ task }: TaskCardProps) {
     <li
       className={`
         task-fade-in group flex items-start gap-3.5 rounded-2xl border px-4 py-3.5
-        transition-all duration-200 hover:shadow-sm
+        transition-all duration-200
         ${overdue
-          ? 'border-amber-200 bg-amber-50/60'
+          ? 'border-amber-900/50 bg-amber-950/20'
           : completed
-          ? 'border-[var(--color-border)] bg-gray-50/80'
-          : 'border-[var(--color-border)] bg-white shadow-[0_1px_3px_rgba(0,0,0,0.04)]'
+          ? 'border-[var(--color-border)] bg-[var(--color-surface)]/40'
+          : 'border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-border-strong)]'
         }
-        ${isPending ? 'opacity-50 pointer-events-none' : ''}
+        ${isPending ? 'opacity-40 pointer-events-none' : ''}
       `}
       style={{ willChange: isPending ? 'opacity' : 'auto' }}
     >
@@ -101,8 +101,8 @@ export function TaskCard({ task }: TaskCardProps) {
           ${completed
             ? 'border-[var(--color-accent)] bg-[var(--color-accent)]'
             : overdue
-            ? 'border-amber-400 hover:border-amber-500 hover:bg-amber-50'
-            : 'border-gray-300 hover:border-[var(--color-accent)] hover:bg-violet-50'
+            ? 'border-amber-600/60 hover:border-amber-400 hover:bg-amber-950/40'
+            : 'border-[var(--color-border-strong)] hover:border-violet-500 hover:bg-violet-900/20'
           }
         `}
       >
@@ -126,13 +126,13 @@ export function TaskCard({ task }: TaskCardProps) {
           {task.priority === 'high' && !completed && (
             <span
               aria-label="High priority"
-              className="mt-[3px] shrink-0 size-1.5 rounded-full bg-orange-500"
+              className="mt-[3px] shrink-0 size-1.5 rounded-full bg-orange-400"
             />
           )}
           <p
             className={`text-sm font-medium leading-snug break-words transition-all duration-200 ${
               completed
-                ? 'line-through text-gray-400'
+                ? 'line-through text-[var(--color-text-muted)]'
                 : 'text-[var(--color-text-primary)]'
             }`}
           >
@@ -142,7 +142,7 @@ export function TaskCard({ task }: TaskCardProps) {
 
         {task.due_date && (
           <div className={`mt-1 flex items-center gap-1 text-xs ${
-            overdue ? 'text-amber-700 font-medium' : 'text-[var(--color-text-muted)]'
+            overdue ? 'text-[var(--color-overdue)] font-medium' : 'text-[var(--color-text-muted)]'
           }`}>
             {overdue ? (
               <svg aria-hidden="true" className="size-3 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
@@ -160,19 +160,19 @@ export function TaskCard({ task }: TaskCardProps) {
         {overdue && !completed && (
           <button
             onClick={handleRescheduleToday}
-            className="mt-1.5 text-xs font-medium text-amber-700 hover:text-amber-800 hover:underline underline-offset-2"
+            className="mt-1.5 text-xs font-medium text-[var(--color-overdue)] hover:text-amber-300 hover:underline underline-offset-2 transition"
           >
             Move to today →
           </button>
         )}
 
         {showDeleteConfirm && (
-          <div className="mt-2.5 flex items-center gap-3 rounded-lg bg-red-50 px-3 py-2">
-            <span className="text-xs text-gray-600">Delete this task?</span>
-            <button onClick={handleDelete} className="text-xs font-semibold text-red-600 hover:text-red-700">
+          <div className="mt-2.5 flex items-center gap-3 rounded-lg bg-red-950/40 border border-red-900/30 px-3 py-2">
+            <span className="text-xs text-[var(--color-text-muted)]">Delete this task?</span>
+            <button onClick={handleDelete} className="text-xs font-semibold text-red-400 hover:text-red-300">
               Delete
             </button>
-            <button onClick={() => setShowDeleteConfirm(false)} className="text-xs text-gray-400 hover:text-gray-600">
+            <button onClick={() => setShowDeleteConfirm(false)} className="text-xs text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)]">
               Cancel
             </button>
           </div>
@@ -185,7 +185,7 @@ export function TaskCard({ task }: TaskCardProps) {
           <button
             onClick={() => setShowEdit(true)}
             aria-label={`Edit "${task.title}"`}
-            className="flex size-8 items-center justify-center rounded-lg text-gray-400 hover:bg-gray-100 hover:text-gray-600 transition min-h-[44px] min-w-[44px]"
+            className="flex size-8 items-center justify-center rounded-lg text-[var(--color-text-muted)] hover:bg-white/8 hover:text-[var(--color-text-primary)] transition min-h-[44px] min-w-[44px]"
           >
             <svg aria-hidden="true" className="size-3.5" fill="none" stroke="currentColor" strokeWidth="1.75" viewBox="0 0 24 24">
               <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
@@ -197,7 +197,7 @@ export function TaskCard({ task }: TaskCardProps) {
           <button
             onClick={() => setShowDeleteConfirm(true)}
             aria-label={`Delete "${task.title}"`}
-            className="flex size-8 items-center justify-center rounded-lg text-gray-400 hover:bg-red-50 hover:text-red-500 transition min-h-[44px] min-w-[44px]"
+            className="flex size-8 items-center justify-center rounded-lg text-[var(--color-text-muted)] hover:bg-red-950/40 hover:text-red-400 transition min-h-[44px] min-w-[44px]"
           >
             <svg aria-hidden="true" className="size-3.5" fill="none" stroke="currentColor" strokeWidth="1.75" viewBox="0 0 24 24">
               <polyline points="3 6 5 6 21 6" />

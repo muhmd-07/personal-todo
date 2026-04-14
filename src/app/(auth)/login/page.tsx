@@ -26,6 +26,8 @@ export default function LoginPage() {
     })
   }
 
+  const inputClass = "w-full rounded-xl border border-[var(--color-border)] bg-[var(--color-surface-raised)] px-3.5 py-2.5 text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-muted)] outline-none focus:border-violet-500/60 focus:ring-3 focus:ring-violet-500/10 transition-all duration-150"
+
   return (
     <div className="space-y-6">
       <div className="text-center">
@@ -41,7 +43,7 @@ export default function LoginPage() {
         <div>
           <label
             htmlFor="email"
-            className="block text-sm font-medium text-[var(--color-text-primary)] mb-1"
+            className="block text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)] mb-1.5"
           >
             Email
           </label>
@@ -53,27 +55,27 @@ export default function LoginPage() {
             required
             aria-describedby={fieldErrors.email ? 'email-error' : undefined}
             aria-invalid={!!fieldErrors.email}
-            className="w-full rounded-xl border border-[var(--color-border)] bg-gray-50/50 px-3.5 py-2.5 text-sm text-[var(--color-text-primary)] placeholder:text-gray-400 outline-none focus:border-violet-400 focus:ring-3 focus:ring-violet-500/10 focus:bg-white aria-invalid:border-red-400 aria-invalid:ring-red-400/20 transition-all duration-150"
+            className={`${inputClass} aria-invalid:border-red-500/60 aria-invalid:ring-red-500/10`}
             placeholder="you@example.com"
           />
           {fieldErrors.email && (
-            <p id="email-error" role="alert" className="mt-1 text-xs text-red-500">
+            <p id="email-error" role="alert" className="mt-1 text-xs text-red-400">
               {fieldErrors.email[0]}
             </p>
           )}
         </div>
 
         <div>
-          <div className="flex items-center justify-between mb-1">
+          <div className="flex items-center justify-between mb-1.5">
             <label
               htmlFor="password"
-              className="block text-sm font-medium text-[var(--color-text-primary)]"
+              className="block text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)]"
             >
               Password
             </label>
             <Link
               href="/reset-password"
-              className="text-xs text-[var(--color-accent)] hover:underline"
+              className="text-xs text-[var(--color-accent)] hover:text-violet-400 hover:underline"
             >
               Forgot password?
             </Link>
@@ -86,18 +88,18 @@ export default function LoginPage() {
             required
             aria-describedby={fieldErrors.password ? 'password-error' : undefined}
             aria-invalid={!!fieldErrors.password}
-            className="w-full rounded-xl border border-[var(--color-border)] bg-gray-50/50 px-3.5 py-2.5 text-sm text-[var(--color-text-primary)] placeholder:text-gray-400 outline-none focus:border-violet-400 focus:ring-3 focus:ring-violet-500/10 focus:bg-white aria-invalid:border-red-400 aria-invalid:ring-red-400/20 transition-all duration-150"
+            className={`${inputClass} aria-invalid:border-red-500/60 aria-invalid:ring-red-500/10`}
             placeholder="Your password"
           />
           {fieldErrors.password && (
-            <p id="password-error" role="alert" className="mt-1 text-xs text-red-500">
+            <p id="password-error" role="alert" className="mt-1 text-xs text-red-400">
               {fieldErrors.password[0]}
             </p>
           )}
         </div>
 
         {error && !fieldErrors.email && !fieldErrors.password && (
-          <p role="alert" className="text-sm text-red-500 text-center">
+          <p role="alert" className="text-sm text-red-400 text-center">
             {error}
           </p>
         )}
@@ -105,7 +107,7 @@ export default function LoginPage() {
         <button
           type="submit"
           disabled={isPending}
-          className="w-full rounded-xl bg-gradient-to-br from-violet-500 to-violet-700 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:from-violet-600 hover:to-violet-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-150"
+          className="w-full rounded-xl bg-gradient-to-br from-violet-500 to-violet-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:from-violet-400 hover:to-violet-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-surface)] disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-150"
         >
           {isPending ? 'Signing in…' : 'Sign in'}
         </button>
@@ -115,7 +117,7 @@ export default function LoginPage() {
         Don&apos;t have an account?{' '}
         <Link
           href="/register"
-          className="font-medium text-[var(--color-accent)] hover:underline"
+          className="font-medium text-[var(--color-accent)] hover:text-violet-400 hover:underline"
         >
           Create one
         </Link>

@@ -10,7 +10,7 @@ export function ViewToggle({ view, onViewChange }: ViewToggleProps) {
     <div
       role="group"
       aria-label="Task view"
-      className="inline-flex rounded-xl border border-[var(--color-border)] bg-gray-50 p-1 gap-0.5"
+      className="inline-flex rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-1 gap-0.5"
     >
       <button
         onClick={() => onViewChange('focus')}
@@ -18,8 +18,8 @@ export function ViewToggle({ view, onViewChange }: ViewToggleProps) {
         className={`
           rounded-lg px-3.5 py-1.5 text-xs font-semibold tracking-tight transition-all duration-150
           ${view === 'focus'
-            ? 'bg-white text-[var(--color-accent)] shadow-sm border border-[var(--color-border)]'
-            : 'text-gray-500 hover:text-gray-700'
+            ? 'bg-[var(--color-surface-raised)] text-[var(--color-text-primary)] border border-[var(--color-border-strong)]'
+            : 'text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)]'
           }
         `}
       >
@@ -31,8 +31,8 @@ export function ViewToggle({ view, onViewChange }: ViewToggleProps) {
         className={`
           rounded-lg px-3.5 py-1.5 text-xs font-semibold tracking-tight transition-all duration-150
           ${view === 'all'
-            ? 'bg-white text-[var(--color-accent)] shadow-sm border border-[var(--color-border)]'
-            : 'text-gray-500 hover:text-gray-700'
+            ? 'bg-[var(--color-surface-raised)] text-[var(--color-text-primary)] border border-[var(--color-border-strong)]'
+            : 'text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)]'
           }
         `}
       >

@@ -70,7 +70,6 @@ export function TaskInput({ inputRef: externalRef }: TaskInputProps = {}) {
         setValue('')
         setParsed({ title: '', dueDate: null, reminderTime: null })
         inputRef.current?.focus()
-        // Show notification prompt contextually after first due-time task
         if (hasDueTime && typeof Notification !== 'undefined' && Notification.permission === 'default') {
           setShowNotifPrompt(true)
         }
@@ -81,7 +80,7 @@ export function TaskInput({ inputRef: externalRef }: TaskInputProps = {}) {
   return (
     <div className="w-full">
       <form onSubmit={handleSubmit}>
-        <div className="relative flex items-center rounded-2xl border border-[var(--color-border)] bg-white shadow-[0_1px_4px_rgba(0,0,0,0.06)] focus-within:border-violet-400 focus-within:ring-3 focus-within:ring-violet-500/10 transition-all duration-200">
+        <div className="relative flex items-center rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] focus-within:border-violet-500/60 focus-within:ring-3 focus-within:ring-violet-500/10 transition-all duration-200">
           <input
             ref={inputRef}
             type="text"
@@ -91,44 +90,21 @@ export function TaskInput({ inputRef: externalRef }: TaskInputProps = {}) {
             aria-label="New task"
             autoComplete="off"
             spellCheck
-            className="flex-1 bg-transparent px-4 py-3.5 text-sm font-medium text-[var(--color-text-primary)] placeholder:text-gray-400 placeholder:font-normal outline-none"
+            className="flex-1 bg-transparent px-4 py-3.5 text-sm font-medium text-[var(--color-text-primary)] placeholder:text-[var(--color-text-muted)] placeholder:font-normal outline-none"
           />
           <button
             type="submit"
             disabled={isPending || !value.trim()}
             aria-label="Add task"
-            className="mr-2 flex items-center justify-center size-8 rounded-xl bg-gradient-to-br from-violet-500 to-violet-700 text-white shadow-sm hover:from-violet-600 hover:to-violet-800 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-150"
+            className="mr-2 flex items-center justify-center size-8 rounded-xl bg-gradient-to-br from-violet-500 to-violet-600 text-white shadow-sm hover:from-violet-400 hover:to-violet-500 disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-150"
           >
             {isPending ? (
-              <svg
-                aria-hidden="true"
-                className="size-4 animate-spin"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <circle
-                  className="opacity-25"
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  stroke="currentColor"
-                  strokeWidth="4"
-                />
-                <path
-                  className="opacity-75"
-                  fill="currentColor"
-                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
-                />
+              <svg aria-hidden="true" className="size-4 animate-spin" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
               </svg>
             ) : (
-              <svg
-                aria-hidden="true"
-                className="size-4"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                viewBox="0 0 24 24"
-              >
+              <svg aria-hidden="true" className="size-4" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
                 <line x1="12" y1="5" x2="12" y2="19" />
                 <line x1="5" y1="12" x2="19" y2="12" />
               </svg>
@@ -150,7 +126,7 @@ export function TaskInput({ inputRef: externalRef }: TaskInputProps = {}) {
                   debouncedParse(newVal)
                   inputRef.current?.focus()
                 }}
-                className="rounded-full bg-zinc-100 px-2.5 py-1 text-xs text-zinc-500 hover:bg-violet-50 hover:text-violet-700 transition"
+                className="rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-2.5 py-1 text-xs text-[var(--color-text-muted)] hover:border-violet-500/40 hover:text-violet-400 transition"
               >
                 {chip}
               </button>
@@ -160,7 +136,7 @@ export function TaskInput({ inputRef: externalRef }: TaskInputProps = {}) {
       </form>
 
       {error && (
-        <p role="alert" className="mt-2 text-xs text-red-500">
+        <p role="alert" className="mt-2 text-xs text-red-400">
           {error}
         </p>
       )}

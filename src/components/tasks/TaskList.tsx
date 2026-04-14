@@ -41,13 +41,13 @@ export function TaskList({ tasks, view }: TaskListProps) {
         <section aria-labelledby="overdue-heading">
           <h3
             id="overdue-heading"
-            className="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-[var(--color-overdue)]"
+            className="mb-2.5 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-[var(--color-overdue)]"
           >
             <svg aria-hidden="true" className="size-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
             </svg>
             Overdue
-            <span className="ml-0.5 rounded-full bg-amber-100 px-1.5 py-0.5 text-[10px] font-semibold text-amber-800">
+            <span className="ml-0.5 rounded-full bg-amber-900/30 px-1.5 py-0.5 text-[10px] font-semibold text-amber-400">
               {overdueTasks.length}
             </span>
           </h3>
@@ -63,10 +63,10 @@ export function TaskList({ tasks, view }: TaskListProps) {
         <section aria-labelledby="today-heading">
           <h3
             id="today-heading"
-            className="mb-2 flex items-center gap-1.5 text-sm font-semibold text-[var(--color-text-primary)]"
+            className="mb-2.5 flex items-center gap-1.5 text-sm font-semibold text-[var(--color-text-primary)]"
           >
             Today
-            <span className="ml-0.5 rounded-full bg-violet-100 px-1.5 py-0.5 text-[10px] font-semibold text-violet-700">
+            <span className="ml-0.5 rounded-full bg-violet-900/40 px-1.5 py-0.5 text-[10px] font-semibold text-violet-400">
               {todayTasks.length}
             </span>
           </h3>
@@ -82,10 +82,10 @@ export function TaskList({ tasks, view }: TaskListProps) {
         <section aria-labelledby="upcoming-heading">
           <h3
             id="upcoming-heading"
-            className="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-[var(--color-text-muted)]"
+            className="mb-2.5 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-[var(--color-text-muted)]"
           >
             Upcoming
-            <span className="ml-0.5 rounded-full bg-zinc-100 px-1.5 py-0.5 text-[10px] font-semibold text-zinc-500">
+            <span className="ml-0.5 rounded-full bg-white/8 px-1.5 py-0.5 text-[10px] font-semibold text-[var(--color-text-muted)]">
               {futureTasks.length}
             </span>
           </h3>
@@ -101,10 +101,10 @@ export function TaskList({ tasks, view }: TaskListProps) {
         <section aria-labelledby="undated-heading">
           <h3
             id="undated-heading"
-            className="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-[var(--color-text-muted)]"
+            className="mb-2.5 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-[var(--color-text-muted)]"
           >
             No due date
-            <span className="ml-0.5 rounded-full bg-zinc-100 px-1.5 py-0.5 text-[10px] font-semibold text-zinc-500">
+            <span className="ml-0.5 rounded-full bg-white/8 px-1.5 py-0.5 text-[10px] font-semibold text-[var(--color-text-muted)]">
               {undatedTasks.length}
             </span>
           </h3>
@@ -121,7 +121,7 @@ export function TaskList({ tasks, view }: TaskListProps) {
           <details>
             <summary
               id="completed-heading"
-              className="cursor-pointer list-none mb-2 text-xs font-semibold uppercase tracking-wide text-[var(--color-text-muted)] flex items-center gap-1 hover:text-[var(--color-text-primary)] transition select-none"
+              className="cursor-pointer list-none mb-2.5 text-xs font-semibold uppercase tracking-widest text-[var(--color-text-muted)] flex items-center gap-1 hover:text-[var(--color-text-primary)] transition select-none"
             >
               <svg
                 aria-hidden="true"

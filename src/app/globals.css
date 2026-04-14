@@ -11,26 +11,27 @@
 ───────────────────────────────────────────────────────────────────────────── */
 
 @theme {
-  /* Colour Palette */
-  --color-background: #f8f8fb;   /* off-white with a hint of violet */
-  --color-surface: #ffffff;
-  --color-text-primary: #0f0f12;  /* near-black, softer than pure black */
-  --color-text-muted: #6b7280;    /* gray-500 */
-  --color-accent: #6d28d9;        /* violet-700 — slightly deeper, more professional */
-  --color-accent-hover: #5b21b6;  /* violet-800 */
-  --color-accent-light: #ede9fe;  /* violet-100 */
-  --color-overdue: #b45309;       /* amber-700 */
-  --color-overdue-bg: #fffbeb;
-  --color-success: #7c3aed;       /* violet for completed checkbox */
-  --color-border: #e5e7eb;        /* gray-200 */
-  --color-border-strong: #d1d5db; /* gray-300 */
+  /* Colour Palette — Dark Theme */
+  --color-background: #0c0c0e;
+  --color-surface: #131316;
+  --color-surface-raised: #1c1c20;
+  --color-text-primary: #ededf0;
+  --color-text-muted: #636370;
+  --color-accent: #8b5cf6;        /* violet-500 — pops on dark */
+  --color-accent-hover: #7c3aed;
+  --color-accent-light: #2d1b69;  /* dark violet tint */
+  --color-overdue: #fbbf24;       /* amber-400 — visible on dark */
+  --color-overdue-bg: #1a1200;
+  --color-success: #8b5cf6;
+  --color-border: #26262b;
+  --color-border-strong: #3a3a42;
 
   /* Typography Scale */
   --text-xs: 0.75rem;
-  --text-sm: 0.875rem;
-  --text-base: 1rem;
-  --text-lg: 1.125rem;
-  --text-xl: 1.25rem;
+  --text-sm: 0.9375rem;    /* 15px — bumped up from 14px */
+  --text-base: 1.0625rem;  /* 17px — slightly larger base */
+  --text-lg: 1.25rem;
+  --text-xl: 1.5rem;
 
   /* Font family */
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
@@ -146,55 +147,49 @@ details[open] summary .details-chevron {
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-/* ─── Personal Todo — Overrides shadcn defaults to match design system ─────── */
+/* ─── Slate — Dark theme overrides for shadcn ─────────────────────────────── */
 :root {
-  /* Background: zinc-50 (not pure white) */
-  --background: #fafafa;
-  --foreground: #18181b;         /* zinc-900 */
+  --background: #0c0c0e;
+  --foreground: #ededf0;
 
-  --card: #ffffff;               /* surface: pure white */
-  --card-foreground: #18181b;
+  --card: #131316;
+  --card-foreground: #ededf0;
 
-  --popover: #ffffff;
-  --popover-foreground: #18181b;
+  --popover: #1c1c20;
+  --popover-foreground: #ededf0;
 
-  /* Primary action: violet-600 */
-  --primary: #7c3aed;
+  --primary: #8b5cf6;
   --primary-foreground: #ffffff;
 
-  --secondary: #f4f4f5;          /* zinc-100 */
-  --secondary-foreground: #18181b;
+  --secondary: #1c1c20;
+  --secondary-foreground: #ededf0;
 
-  --muted: #f4f4f5;              /* zinc-100 */
-  --muted-foreground: #52525b;   /* zinc-600 — WCAG AA compliant */
+  --muted: #1c1c20;
+  --muted-foreground: #636370;
 
-  /* shadcn accent = hover bg (light), not our violet accent */
-  --accent: #f4f4f5;             /* zinc-100 */
-  --accent-foreground: #18181b;
+  --accent: #1c1c20;
+  --accent-foreground: #ededf0;
 
-  --destructive: oklch(0.577 0.245 27.325);
+  --destructive: #ef4444;
 
-  --border: #e4e4e7;             /* zinc-200 */
-  --input: #e4e4e7;              /* zinc-200 */
-  --ring: #7c3aed;               /* violet-600 — focus ring matches accent */
+  --border: #26262b;
+  --input: #26262b;
+  --ring: #8b5cf6;
 
-  --radius: 0.5rem;              /* 8px base radius */
+  --radius: 0.5rem;
 
-  /* Overdue: amber-800 (WCAG AA compliant) */
-  --overdue: #92400e;
+  --overdue: #fbbf24;
+  --color-accent: #8b5cf6;
+  --overdue-bg: #1a1200;
 
-  /* Restore --color-accent after @theme inline overrides it with var(--accent) */
-  --color-accent: #7c3aed;
-  --overdue-bg: #fffbeb;
-
-  --sidebar: #fafafa;
-  --sidebar-foreground: #18181b;
-  --sidebar-primary: #7c3aed;
+  --sidebar: #131316;
+  --sidebar-foreground: #ededf0;
+  --sidebar-primary: #8b5cf6;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #f4f4f5;
-  --sidebar-accent-foreground: #18181b;
-  --sidebar-border: #e4e4e7;
-  --sidebar-ring: #7c3aed;
+  --sidebar-accent: #1c1c20;
+  --sidebar-accent-foreground: #ededf0;
+  --sidebar-border: #26262b;
+  --sidebar-ring: #8b5cf6;
 }
 
 .dark {

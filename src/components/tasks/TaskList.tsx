@@ -8,8 +8,7 @@ interface TaskListProps {
 }
 
 export function TaskList({ tasks, view }: TaskListProps) {
-  // Use local date (not UTC) to avoid midnight-rollover misclassification for non-UTC users
-  const today = new Date().toLocaleDateString('en-CA') // returns YYYY-MM-DD in local time
+  const today = new Date().toLocaleDateString('en-CA')
 
   const activeTasks = tasks.filter((t) => !t.completed_at && !t.deleted_at)
   const completedTasks = tasks.filter((t) => t.completed_at && !t.deleted_at)
@@ -29,7 +28,7 @@ export function TaskList({ tasks, view }: TaskListProps) {
   const undatedTasks = displayTasks.filter((t) => !t.due_date)
 
   if (displayTasks.length === 0 && completedTasks.length === 0) {
-    return <EmptyState />
+    return <EmptyState view={view} />
   }
 
   return (
@@ -42,9 +41,15 @@ export function TaskList({ tasks, view }: TaskListProps) {
         <section aria-labelledby="overdue-heading">
           <h3
             id="overdue-heading"
-            className="mb-2 text-xs font-semibold uppercase tracking-wide text-[var(--color-overdue)]"
+            className="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-[var(--color-overdue)]"
           >
+            <svg aria-hidden="true" className="size-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+            </svg>
             Overdue
+            <span className="ml-0.5 rounded-full bg-amber-100 px-1.5 py-0.5 text-[10px] font-semibold text-amber-800">
+              {overdueTasks.length}
+            </span>
           </h3>
           <ul className="space-y-2">
             {overdueTasks.map((task) => (
@@ -58,9 +63,12 @@ export function TaskList({ tasks, view }: TaskListProps) {
         <section aria-labelledby="today-heading">
           <h3
             id="today-heading"
-            className="mb-2 text-xs font-semibold uppercase tracking-wide text-[var(--color-text-muted)]"
+            className="mb-2 flex items-center gap-1.5 text-sm font-semibold text-[var(--color-text-primary)]"
           >
             Today
+            <span className="ml-0.5 rounded-full bg-violet-100 px-1.5 py-0.5 text-[10px] font-semibold text-violet-700">
+              {todayTasks.length}
+            </span>
           </h3>
           <ul className="space-y-2">
             {todayTasks.map((task) => (
@@ -74,9 +82,12 @@ export function TaskList({ tasks, view }: TaskListProps) {
         <section aria-labelledby="upcoming-heading">
           <h3
             id="upcoming-heading"
-            className="mb-2 text-xs font-semibold uppercase tracking-wide text-[var(--color-text-muted)]"
+            className="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-[var(--color-text-muted)]"
           >
             Upcoming
+            <span className="ml-0.5 rounded-full bg-zinc-100 px-1.5 py-0.5 text-[10px] font-semibold text-zinc-500">
+              {futureTasks.length}
+            </span>
           </h3>
           <ul className="space-y-2">
             {futureTasks.map((task) => (
@@ -90,9 +101,12 @@ export function TaskList({ tasks, view }: TaskListProps) {
         <section aria-labelledby="undated-heading">
           <h3
             id="undated-heading"
-            className="mb-2 text-xs font-semibold uppercase tracking-wide text-[var(--color-text-muted)]"
+            className="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-[var(--color-text-muted)]"
           >
             No due date
+            <span className="ml-0.5 rounded-full bg-zinc-100 px-1.5 py-0.5 text-[10px] font-semibold text-zinc-500">
+              {undatedTasks.length}
+            </span>
           </h3>
           <ul className="space-y-2">
             {undatedTasks.map((task) => (
@@ -111,7 +125,7 @@ export function TaskList({ tasks, view }: TaskListProps) {
             >
               <svg
                 aria-hidden="true"
-                className="size-3"
+                className="size-3 details-chevron"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2.5"

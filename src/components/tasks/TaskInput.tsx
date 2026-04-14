@@ -137,6 +137,26 @@ export function TaskInput({ inputRef: externalRef }: TaskInputProps = {}) {
         </div>
 
         {parsed.dueDate && <NlpPreview parsed={parsed} />}
+
+        {!value && (
+          <div className="mt-2 flex flex-wrap gap-1.5">
+            {['tomorrow', 'at 3pm', 'next week', 'remind me'].map((chip) => (
+              <button
+                key={chip}
+                type="button"
+                onClick={() => {
+                  const newVal = value ? `${value} ${chip}` : chip
+                  setValue(newVal)
+                  debouncedParse(newVal)
+                  inputRef.current?.focus()
+                }}
+                className="rounded-full bg-zinc-100 px-2.5 py-1 text-xs text-zinc-500 hover:bg-violet-50 hover:text-violet-700 transition"
+              >
+                {chip}
+              </button>
+            ))}
+          </div>
+        )}
       </form>
 
       {error && (

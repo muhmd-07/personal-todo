@@ -90,6 +90,16 @@ body {
   animation: task-fade-in 200ms ease-in forwards;
 }
 
+/* ─── Details/Summary chevron rotation ───────────────────────────────────── */
+
+details summary .details-chevron {
+  transition: transform 150ms ease;
+}
+
+details[open] summary .details-chevron {
+  transform: rotate(90deg);
+}
+
 /* ─── Reduced Motion ──────────────────────────────────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {

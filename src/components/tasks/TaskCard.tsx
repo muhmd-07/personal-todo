@@ -79,23 +79,24 @@ export function TaskCard({ task }: TaskCardProps) {
   return (
     <li
       className={`
-        group flex items-start gap-3 rounded-xl border px-4 py-3 transition
+        task-fade-in group flex items-start gap-3 rounded-xl border px-4 py-3 transition-all duration-200
         ${overdue
           ? 'border-amber-200 bg-[var(--color-overdue-bg)]'
           : 'border-[var(--color-border)] bg-white'
         }
-        ${completed ? 'opacity-60' : ''}
+        ${completed ? 'opacity-50' : ''}
         ${isPending ? 'opacity-50 pointer-events-none' : ''}
       `}
+      style={{ willChange: isPending ? 'opacity' : 'auto' }}
     >
       {/* Checkbox — min 44×44px touch target */}
       <button
         onClick={handleToggleComplete}
         aria-label={completed ? `Mark "${task.title}" incomplete` : `Mark "${task.title}" complete`}
         className={`
-          mt-0.5 flex min-h-[44px] min-w-[44px] shrink-0 items-center justify-center rounded-full border-2 transition
+          mt-0.5 flex min-h-[44px] min-w-[44px] shrink-0 items-center justify-center rounded-full border-2 transition duration-200
           ${completed
-            ? 'border-[var(--color-success)] bg-[var(--color-success)]'
+            ? 'border-[var(--color-accent)] bg-[var(--color-accent)]'
             : overdue
             ? 'border-amber-400 hover:border-amber-500'
             : 'border-[var(--color-border)] hover:border-[var(--color-accent)]'
@@ -105,7 +106,7 @@ export function TaskCard({ task }: TaskCardProps) {
         {completed && (
           <svg
             aria-hidden="true"
-            className="size-3 text-white"
+            className="size-3 text-white animate-[task-fade-in_150ms_ease-out]"
             fill="none"
             stroke="currentColor"
             strokeWidth="3"
@@ -119,7 +120,7 @@ export function TaskCard({ task }: TaskCardProps) {
       {/* Content */}
       <div className="min-w-0 flex-1">
         <p
-          className={`text-sm text-[var(--color-text-primary)] break-words ${
+          className={`text-sm text-[var(--color-text-primary)] break-words transition-all duration-200 ${
             completed ? 'line-through text-[var(--color-text-muted)]' : ''
           }`}
         >
@@ -148,10 +149,29 @@ export function TaskCard({ task }: TaskCardProps) {
             Move to today
           </button>
         )}
+
+        {/* Inline delete confirmation */}
+        {showDeleteConfirm && (
+          <div className="mt-2 flex items-center gap-2">
+            <span className="text-xs text-[var(--color-text-muted)]">Delete this task?</span>
+            <button
+              onClick={handleDelete}
+              className="text-xs font-medium text-red-600 hover:underline"
+            >
+              Yes, delete
+            </button>
+            <button
+              onClick={() => setShowDeleteConfirm(false)}
+              className="text-xs text-[var(--color-text-muted)] hover:underline"
+            >
+              Cancel
+            </button>
+          </div>
+        )}
       </div>
 
-      {/* Edit + Delete */}
-      <div className="shrink-0 flex items-center gap-1 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition">
+      {/* Edit + Delete — always visible on mobile, hover-reveal on desktop */}
+      <div className="shrink-0 flex items-center gap-1 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 sm:group-focus-within:opacity-100 transition duration-150">
         {!showDeleteConfirm && (
           <button
             onClick={() => setShowEdit(true)}
@@ -171,26 +191,11 @@ export function TaskCard({ task }: TaskCardProps) {
             </svg>
           </button>
         )}
-        {showDeleteConfirm ? (
-          <div className="flex items-center gap-2">
-            <button
-              onClick={handleDelete}
-              className="text-xs font-medium text-red-600 hover:underline"
-            >
-              Delete
-            </button>
-            <button
-              onClick={() => setShowDeleteConfirm(false)}
-              className="text-xs text-[var(--color-text-muted)] hover:underline"
-            >
-              Cancel
-            </button>
-          </div>
-        ) : (
+        {!showDeleteConfirm && (
           <button
             onClick={() => setShowDeleteConfirm(true)}
             aria-label={`Delete "${task.title}"`}
-            className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg text-[var(--color-text-muted)] hover:bg-zinc-100 hover:text-zinc-700 transition"
+            className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg text-[var(--color-text-muted)] hover:bg-red-50 hover:text-red-600 transition"
           >
             <svg
               aria-hidden="true"

@@ -11,34 +11,34 @@
 ───────────────────────────────────────────────────────────────────────────── */
 
 @theme {
-  /* Colour Palette — Premium Indigo Dark */
-  --color-background: #07080f;
-  --color-surface: #0d0f1e;
-  --color-surface-raised: #13162b;
-  --color-text-primary: #eaecff;
-  --color-text-muted: #4e5380;
-  --color-accent: #6366f1;
-  --color-accent-hover: #4f52d9;
-  --color-accent-light: #1a1d4a;
+  /* ── Colour Palette — Deep Navy Blue ── */
+  --color-background: #020c1e;
+  --color-surface: #041428;
+  --color-surface-raised: #091e3a;
+  --color-text-primary: #cfe3ff;
+  --color-text-muted: #3d6080;
+  --color-accent: #38bdf8;
+  --color-accent-hover: #0ea5e9;
+  --color-accent-light: #082040;
   --color-overdue: #fb923c;
   --color-overdue-bg: #1c0d00;
-  --color-success: #34d399;
-  --color-border: #191c38;
-  --color-border-strong: #252853;
+  --color-success: #4ade80;
+  --color-border: #0a2040;
+  --color-border-strong: #123058;
 
   /* Typography Scale */
   --text-xs: 0.75rem;
-  --text-sm: 0.9375rem;    /* 15px — bumped up from 14px */
-  --text-base: 1.0625rem;  /* 17px — slightly larger base */
-  --text-lg: 1.25rem;
-  --text-xl: 1.5rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
 
-  /* Font family */
-  --font-sans: var(--font-space), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-mono), ui-monospace, monospace;
+  /* Font families — Syne for display, Inter for UI */
+  --font-display: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, monospace;
 
-  /* Max content width */
-  --max-w-content: 42rem;
+  --max-w-content: 44rem;
 }
 
 /* ─── Base Styles ─────────────────────────────────────────────────────────── */
@@ -56,7 +56,11 @@ body {
   min-height: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  letter-spacing: -0.01em;
+}
+
+/* Display font utility */
+.font-display {
+  font-family: var(--font-display);
 }
 
 /* ─── Typography Utilities ────────────────────────────────────────────────── */
@@ -147,49 +151,49 @@ details[open] summary .details-chevron {
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-/* ─── Slate — Premium indigo dark overrides for shadcn ───────────────────── */
+/* ─── Slate — Deep Navy Blue theme ───────────────────────────────────────── */
 :root {
-  --background: #07080f;
-  --foreground: #eaecff;
+  --background: #020c1e;
+  --foreground: #cfe3ff;
 
-  --card: #0d0f1e;
-  --card-foreground: #eaecff;
+  --card: #041428;
+  --card-foreground: #cfe3ff;
 
-  --popover: #13162b;
-  --popover-foreground: #eaecff;
+  --popover: #091e3a;
+  --popover-foreground: #cfe3ff;
 
-  --primary: #6366f1;
-  --primary-foreground: #ffffff;
+  --primary: #38bdf8;
+  --primary-foreground: #020c1e;
 
-  --secondary: #13162b;
-  --secondary-foreground: #eaecff;
+  --secondary: #091e3a;
+  --secondary-foreground: #cfe3ff;
 
-  --muted: #13162b;
-  --muted-foreground: #4e5380;
+  --muted: #091e3a;
+  --muted-foreground: #3d6080;
 
-  --accent: #13162b;
-  --accent-foreground: #eaecff;
+  --accent: #091e3a;
+  --accent-foreground: #cfe3ff;
 
-  --destructive: #ef4444;
+  --destructive: #f87171;
 
-  --border: #191c38;
-  --input: #191c38;
-  --ring: #6366f1;
+  --border: #0a2040;
+  --input: #0a2040;
+  --ring: #38bdf8;
 
-  --radius: 0.625rem;
+  --radius: 0.75rem;
 
   --overdue: #fb923c;
-  --color-accent: #6366f1;
+  --color-accent: #38bdf8;
   --overdue-bg: #1c0d00;
 
-  --sidebar: #0d0f1e;
-  --sidebar-foreground: #eaecff;
-  --sidebar-primary: #6366f1;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #13162b;
-  --sidebar-accent-foreground: #eaecff;
-  --sidebar-border: #191c38;
-  --sidebar-ring: #6366f1;
+  --sidebar: #020c1e;
+  --sidebar-foreground: #cfe3ff;
+  --sidebar-primary: #38bdf8;
+  --sidebar-primary-foreground: #020c1e;
+  --sidebar-accent: #091e3a;
+  --sidebar-accent-foreground: #cfe3ff;
+  --sidebar-border: #0a2040;
+  --sidebar-ring: #38bdf8;
 }
 
 .dark {

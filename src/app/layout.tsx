@@ -1,19 +1,20 @@
 import type { Metadata } from 'next'
-import { Space_Grotesk } from 'next/font/google'
-import { Fira_Code } from 'next/font/google'
+import { Syne, Inter } from 'next/font/google'
 import './globals.css'
 
-const spaceGrotesk = Space_Grotesk({
-  variable: '--font-space',
+// Syne — bold geometric display font for headings
+const syne = Syne({
+  variable: '--font-display',
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
+  weight: ['400', '500', '600', '700', '800'],
   display: 'swap',
 })
 
-const firaCode = Fira_Code({
-  variable: '--font-mono',
+// Inter — the gold-standard UI font for body text
+const inter = Inter({
+  variable: '--font-body',
   subsets: ['latin'],
-  weight: ['400', '500'],
+  weight: ['300', '400', '500', '600', '700'],
   display: 'swap',
 })
 
@@ -26,7 +27,7 @@ export const metadata: Metadata = {
     statusBarStyle: 'default',
     title: 'Slate',
   },
-  themeColor: '#07080f',
+  themeColor: '#020c1e',
 }
 
 export default function RootLayout({
@@ -35,8 +36,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${spaceGrotesk.variable} ${firaCode.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col">
+    <html lang="en" className={`${syne.variable} ${inter.variable} h-full`}>
+      <body className="min-h-full flex flex-col antialiased">
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:rounded-lg focus:bg-[var(--color-accent)] focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-white"

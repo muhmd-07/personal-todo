@@ -7,6 +7,31 @@ interface TaskListProps {
   view: 'focus' | 'calendar' | 'all'
 }
 
+function SectionDivider({
+  label,
+  count,
+  color = 'muted',
+}: {
+  label: string
+  count: number
+  color?: 'muted' | 'overdue' | 'accent'
+}) {
+  const labelClass =
+    color === 'overdue'
+      ? 'text-[var(--color-overdue)]'
+      : color === 'accent'
+      ? 'text-[var(--color-accent)]'
+      : 'text-[var(--color-text-muted)]'
+
+  return (
+    <div className={`flex items-center gap-2.5 ${labelClass}`}>
+      <span className="text-xs font-semibold tracking-wide">{label}</span>
+      <div className="flex-1 h-px bg-[var(--color-border)]" />
+      <span className="text-[11px] font-semibold opacity-70">{count}</span>
+    </div>
+  )
+}
+
 export function TaskList({ tasks, view }: TaskListProps) {
   const today = new Date().toLocaleDateString('en-CA')
 
@@ -33,25 +58,16 @@ export function TaskList({ tasks, view }: TaskListProps) {
 
   return (
     <div
-      className="space-y-6"
+      className="space-y-5"
       aria-live="polite"
       aria-relevant="additions removals"
     >
       {overdueTasks.length > 0 && (
         <section aria-labelledby="overdue-heading">
-          <h3
-            id="overdue-heading"
-            className="mb-2.5 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-[var(--color-overdue)]"
-          >
-            <svg aria-hidden="true" className="size-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
-            </svg>
-            Overdue
-            <span className="ml-0.5 rounded-full bg-amber-900/30 px-1.5 py-0.5 text-[10px] font-semibold text-amber-400">
-              {overdueTasks.length}
-            </span>
-          </h3>
-          <ul className="space-y-2">
+          <div id="overdue-heading" className="mb-1">
+            <SectionDivider label="Overdue" count={overdueTasks.length} color="overdue" />
+          </div>
+          <ul>
             {overdueTasks.map((task) => (
               <TaskCard key={task.id} task={task} />
             ))}
@@ -61,16 +77,10 @@ export function TaskList({ tasks, view }: TaskListProps) {
 
       {todayTasks.length > 0 && (
         <section aria-labelledby="today-heading">
-          <h3
-            id="today-heading"
-            className="mb-2.5 flex items-center gap-1.5 text-sm font-semibold text-[var(--color-text-primary)]"
-          >
-            Today
-            <span className="ml-0.5 rounded-full bg-violet-900/40 px-1.5 py-0.5 text-[10px] font-semibold text-violet-400">
-              {todayTasks.length}
-            </span>
-          </h3>
-          <ul className="space-y-2">
+          <div id="today-heading" className="mb-1">
+            <SectionDivider label="Today" count={todayTasks.length} color="accent" />
+          </div>
+          <ul>
             {todayTasks.map((task) => (
               <TaskCard key={task.id} task={task} />
             ))}
@@ -80,16 +90,10 @@ export function TaskList({ tasks, view }: TaskListProps) {
 
       {futureTasks.length > 0 && (
         <section aria-labelledby="upcoming-heading">
-          <h3
-            id="upcoming-heading"
-            className="mb-2.5 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-[var(--color-text-muted)]"
-          >
-            Upcoming
-            <span className="ml-0.5 rounded-full bg-white/8 px-1.5 py-0.5 text-[10px] font-semibold text-[var(--color-text-muted)]">
-              {futureTasks.length}
-            </span>
-          </h3>
-          <ul className="space-y-2">
+          <div id="upcoming-heading" className="mb-1">
+            <SectionDivider label="Upcoming" count={futureTasks.length} />
+          </div>
+          <ul>
             {futureTasks.map((task) => (
               <TaskCard key={task.id} task={task} />
             ))}
@@ -99,16 +103,10 @@ export function TaskList({ tasks, view }: TaskListProps) {
 
       {undatedTasks.length > 0 && (
         <section aria-labelledby="undated-heading">
-          <h3
-            id="undated-heading"
-            className="mb-2.5 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-[var(--color-text-muted)]"
-          >
-            No due date
-            <span className="ml-0.5 rounded-full bg-white/8 px-1.5 py-0.5 text-[10px] font-semibold text-[var(--color-text-muted)]">
-              {undatedTasks.length}
-            </span>
-          </h3>
-          <ul className="space-y-2">
+          <div id="undated-heading" className="mb-1">
+            <SectionDivider label="No due date" count={undatedTasks.length} />
+          </div>
+          <ul>
             {undatedTasks.map((task) => (
               <TaskCard key={task.id} task={task} />
             ))}
@@ -118,24 +116,28 @@ export function TaskList({ tasks, view }: TaskListProps) {
 
       {completedTasks.length > 0 && (
         <section aria-labelledby="completed-heading">
-          <details>
+          <details className="group">
             <summary
               id="completed-heading"
-              className="cursor-pointer list-none mb-2.5 text-xs font-semibold uppercase tracking-widest text-[var(--color-text-muted)] flex items-center gap-1 hover:text-[var(--color-text-primary)] transition select-none"
+              className="cursor-pointer list-none mb-1 select-none"
             >
-              <svg
-                aria-hidden="true"
-                className="size-3 details-chevron"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                viewBox="0 0 24 24"
-              >
-                <polyline points="9 18 15 12 9 6" />
-              </svg>
-              Completed ({completedTasks.length})
+              <div className="flex items-center gap-2.5 text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-colors">
+                <svg
+                  aria-hidden="true"
+                  className="size-3 transition-transform group-open:rotate-90"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  viewBox="0 0 24 24"
+                >
+                  <polyline points="9 18 15 12 9 6" />
+                </svg>
+                <span className="text-xs font-semibold tracking-wide">Completed</span>
+                <div className="flex-1 h-px bg-[var(--color-border)]" />
+                <span className="text-[11px] font-semibold opacity-70">{completedTasks.length}</span>
+              </div>
             </summary>
-            <ul className="space-y-2 mt-2">
+            <ul className="mt-1">
               {completedTasks.map((task) => (
                 <TaskCard key={task.id} task={task} />
               ))}

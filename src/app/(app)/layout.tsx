@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { redirect } from 'next/navigation'
+import { Suspense } from 'react'
 import { createClient } from '@/lib/supabase/server'
 import { AppShell } from '@/components/layout/AppShell'
 
@@ -21,5 +22,9 @@ export default async function AppLayout({
     redirect('/login')
   }
 
-  return <AppShell>{children}</AppShell>
+  return (
+    <Suspense>
+      <AppShell>{children}</AppShell>
+    </Suspense>
+  )
 }

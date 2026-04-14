@@ -4,7 +4,12 @@ import type { Task } from '@/lib/types/task'
 
 export const revalidate = 30
 
-export default async function TasksPage() {
+interface TasksPageProps {
+  searchParams: Promise<{ v?: string }>
+}
+
+export default async function TasksPage({ searchParams }: TasksPageProps) {
+  const { v } = await searchParams
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
 
@@ -16,5 +21,5 @@ export default async function TasksPage() {
     .order('due_date', { ascending: true, nullsFirst: false })
     .order('created_at', { ascending: false })
 
-  return <TasksClient tasks={(tasks ?? []) as Task[]} />
+  return <TasksClient tasks={(tasks ?? []) as Task[]} initialView={v} />
 }

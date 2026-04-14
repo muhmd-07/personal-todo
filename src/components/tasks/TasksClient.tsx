@@ -11,6 +11,7 @@ import type { Task } from '@/lib/types/task'
 
 interface TasksClientProps {
   tasks: Task[]
+  initialView?: string
 }
 
 function RefreshButton() {
@@ -57,8 +58,23 @@ function RefreshButton() {
   )
 }
 
-export function TasksClient({ tasks }: TasksClientProps) {
-  const [view, setView] = useState<'focus' | 'calendar' | 'all'>('focus')
+function getViewLabel(view: 'focus' | 'calendar' | 'all', initialView?: string): string {
+  if (initialView === 'today') return 'Today'
+  if (initialView === 'upcoming') return 'Upcoming'
+  if (initialView === 'inbox') return 'Inbox'
+  if (view === 'calendar') return 'Calendar'
+  if (view === 'all') return 'All Tasks'
+  return 'Focus'
+}
+
+export function TasksClient({ tasks, initialView }: TasksClientProps) {
+  const resolvedInitial = (() => {
+    if (initialView === 'calendar') return 'calendar'
+    if (initialView === 'all') return 'all'
+    return 'focus'
+  })()
+
+  const [view, setView] = useState<'focus' | 'calendar' | 'all'>(resolvedInitial)
   const inputRef = useRef<HTMLInputElement>(null)
 
   const handleFocusInput = useCallback(() => {
@@ -75,11 +91,24 @@ export function TasksClient({ tasks }: TasksClientProps) {
   const activeTasks = tasks.filter(t => !t.completed_at && !t.deleted_at)
   const completedTasks = tasks.filter(t => !!t.completed_at && !t.deleted_at)
 
+  // Filter tasks by smart list view
+  const today = new Date().toLocaleDateString('en-CA')
+  let filteredTasks = tasks
+  if (initialView === 'today') {
+    filteredTasks = tasks.filter(t => t.due_date === today)
+  } else if (initialView === 'upcoming') {
+    filteredTasks = tasks.filter(t => t.due_date && t.due_date > today)
+  } else if (initialView === 'inbox') {
+    filteredTasks = tasks.filter(t => !t.due_date && !t.completed_at && !t.deleted_at)
+  }
+
+  const viewLabel = getViewLabel(view, initialView)
+
   return (
     <div className="mx-auto max-w-2xl px-5 py-8">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-3xl font-black tracking-tight text-[var(--color-text-primary)]">Tasks</h1>
+          <h1 className="text-3xl font-black tracking-tight text-[var(--color-text-primary)]">{viewLabel}</h1>
           <p className="text-sm text-[var(--color-text-muted)] mt-0.5 font-medium">
             {activeTasks.length} active · {completedTasks.length} completed
           </p>
@@ -98,9 +127,9 @@ export function TasksClient({ tasks }: TasksClientProps) {
         </div>
 
         {view === 'calendar' ? (
-          <CalendarView tasks={tasks} />
+          <CalendarView tasks={filteredTasks} />
         ) : (
-          <TaskList tasks={tasks} view={view} />
+          <TaskList tasks={filteredTasks} view={view} />
         )}
       </div>
     </div>

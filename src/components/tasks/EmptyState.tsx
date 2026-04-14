@@ -1,5 +1,5 @@
 interface EmptyStateProps {
-  view?: 'focus' | 'all'
+  view?: 'focus' | 'calendar' | 'all'
 }
 
 export function EmptyState({ view = 'all' }: EmptyStateProps) {

@@ -11,20 +11,20 @@
 ───────────────────────────────────────────────────────────────────────────── */
 
 @theme {
-  /* Colour Palette — Atlassian-inspired Dark Navy Theme */
-  --color-background: #070c18;
-  --color-surface: #0d1525;
-  --color-surface-raised: #152033;
-  --color-text-primary: #e6edff;
-  --color-text-muted: #5e7497;
-  --color-accent: #7c6af7;        /* violet — pops on dark navy */
-  --color-accent-hover: #6355e0;
-  --color-accent-light: #1e1a4a;  /* dark violet tint */
+  /* Colour Palette — Deep Blue Dark Theme */
+  --color-background: #030b1a;
+  --color-surface: #071223;
+  --color-surface-raised: #0d1c34;
+  --color-text-primary: #ddeaff;
+  --color-text-muted: #4d6a90;
+  --color-accent: #5b8dee;        /* bright blue — pops on deep navy */
+  --color-accent-hover: #4777d6;
+  --color-accent-light: #0d2045;  /* dark blue tint */
   --color-overdue: #f59e0b;       /* amber — visible on dark */
   --color-overdue-bg: #1a1000;
   --color-success: #34d399;
-  --color-border: #1a2740;
-  --color-border-strong: #243650;
+  --color-border: #0f2040;
+  --color-border-strong: #1a3258;
 
   /* Typography Scale */
   --text-xs: 0.75rem;
@@ -34,7 +34,7 @@
   --text-xl: 1.5rem;
 
   /* Font family */
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 
   /* Max content width */
@@ -147,49 +147,49 @@ details[open] summary .details-chevron {
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-/* ─── Slate — Dark navy theme overrides for shadcn ───────────────────────── */
+/* ─── Slate — Deep blue dark theme overrides for shadcn ──────────────────── */
 :root {
-  --background: #070c18;
-  --foreground: #e6edff;
+  --background: #030b1a;
+  --foreground: #ddeaff;
 
-  --card: #0d1525;
-  --card-foreground: #e6edff;
+  --card: #071223;
+  --card-foreground: #ddeaff;
 
-  --popover: #152033;
-  --popover-foreground: #e6edff;
+  --popover: #0d1c34;
+  --popover-foreground: #ddeaff;
 
-  --primary: #7c6af7;
+  --primary: #5b8dee;
   --primary-foreground: #ffffff;
 
-  --secondary: #152033;
-  --secondary-foreground: #e6edff;
+  --secondary: #0d1c34;
+  --secondary-foreground: #ddeaff;
 
-  --muted: #152033;
-  --muted-foreground: #5e7497;
+  --muted: #0d1c34;
+  --muted-foreground: #4d6a90;
 
-  --accent: #152033;
-  --accent-foreground: #e6edff;
+  --accent: #0d1c34;
+  --accent-foreground: #ddeaff;
 
   --destructive: #ef4444;
 
-  --border: #1a2740;
-  --input: #1a2740;
-  --ring: #7c6af7;
+  --border: #0f2040;
+  --input: #0f2040;
+  --ring: #5b8dee;
 
   --radius: 0.5rem;
 
   --overdue: #f59e0b;
-  --color-accent: #7c6af7;
+  --color-accent: #5b8dee;
   --overdue-bg: #1a1000;
 
-  --sidebar: #0d1525;
-  --sidebar-foreground: #e6edff;
-  --sidebar-primary: #7c6af7;
+  --sidebar: #071223;
+  --sidebar-foreground: #ddeaff;
+  --sidebar-primary: #5b8dee;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #152033;
-  --sidebar-accent-foreground: #e6edff;
-  --sidebar-border: #1a2740;
-  --sidebar-ring: #7c6af7;
+  --sidebar-accent: #0d1c34;
+  --sidebar-accent-foreground: #ddeaff;
+  --sidebar-border: #0f2040;
+  --sidebar-ring: #5b8dee;
 }
 
 .dark {

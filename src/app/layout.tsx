@@ -1,11 +1,13 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Plus_Jakarta_Sans } from 'next/font/google'
+import { Geist_Mono } from 'next/font/google'
 import './globals.css'
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
+const jakartaSans = Plus_Jakarta_Sans({
+  variable: '--font-jakarta',
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
+  weight: ['400', '500', '600', '700', '800'],
+  display: 'swap',
 })
 
 const geistMono = Geist_Mono({
@@ -15,15 +17,15 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Slate — Task management without the noise',
-  description: 'Task management without the noise. Capture tasks instantly, stay focused, ship what matters.',
+  title: 'Slate — Personal task manager',
+  description: 'Stay on top of your day. Capture tasks, track progress, and get things done.',
   manifest: '/manifest.json',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
     title: 'Slate',
   },
-  themeColor: '#7c3aed',
+  themeColor: '#1a2a4a',
 }
 
 export default function RootLayout({
@@ -32,7 +34,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
+    <html lang="en" className={`${jakartaSans.variable} ${geistMono.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
         <a
           href="#main-content"

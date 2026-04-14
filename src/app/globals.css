@@ -11,20 +11,20 @@
 ───────────────────────────────────────────────────────────────────────────── */
 
 @theme {
-  /* Colour Palette — Deep Blue Dark Theme */
-  --color-background: #030b1a;
-  --color-surface: #071223;
-  --color-surface-raised: #0d1c34;
-  --color-text-primary: #ddeaff;
-  --color-text-muted: #4d6a90;
-  --color-accent: #5b8dee;        /* bright blue — pops on deep navy */
-  --color-accent-hover: #4777d6;
-  --color-accent-light: #0d2045;  /* dark blue tint */
-  --color-overdue: #f59e0b;       /* amber — visible on dark */
-  --color-overdue-bg: #1a1000;
+  /* Colour Palette — Premium Indigo Dark */
+  --color-background: #07080f;
+  --color-surface: #0d0f1e;
+  --color-surface-raised: #13162b;
+  --color-text-primary: #eaecff;
+  --color-text-muted: #4e5380;
+  --color-accent: #6366f1;
+  --color-accent-hover: #4f52d9;
+  --color-accent-light: #1a1d4a;
+  --color-overdue: #fb923c;
+  --color-overdue-bg: #1c0d00;
   --color-success: #34d399;
-  --color-border: #0f2040;
-  --color-border-strong: #1a3258;
+  --color-border: #191c38;
+  --color-border-strong: #252853;
 
   /* Typography Scale */
   --text-xs: 0.75rem;
@@ -34,8 +34,8 @@
   --text-xl: 1.5rem;
 
   /* Font family */
-  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-sans: var(--font-space), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono), ui-monospace, monospace;
 
   /* Max content width */
   --max-w-content: 42rem;
@@ -147,49 +147,49 @@ details[open] summary .details-chevron {
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-/* ─── Slate — Deep blue dark theme overrides for shadcn ──────────────────── */
+/* ─── Slate — Premium indigo dark overrides for shadcn ───────────────────── */
 :root {
-  --background: #030b1a;
-  --foreground: #ddeaff;
+  --background: #07080f;
+  --foreground: #eaecff;
 
-  --card: #071223;
-  --card-foreground: #ddeaff;
+  --card: #0d0f1e;
+  --card-foreground: #eaecff;
 
-  --popover: #0d1c34;
-  --popover-foreground: #ddeaff;
+  --popover: #13162b;
+  --popover-foreground: #eaecff;
 
-  --primary: #5b8dee;
+  --primary: #6366f1;
   --primary-foreground: #ffffff;
 
-  --secondary: #0d1c34;
-  --secondary-foreground: #ddeaff;
+  --secondary: #13162b;
+  --secondary-foreground: #eaecff;
 
-  --muted: #0d1c34;
-  --muted-foreground: #4d6a90;
+  --muted: #13162b;
+  --muted-foreground: #4e5380;
 
-  --accent: #0d1c34;
-  --accent-foreground: #ddeaff;
+  --accent: #13162b;
+  --accent-foreground: #eaecff;
 
   --destructive: #ef4444;
 
-  --border: #0f2040;
-  --input: #0f2040;
-  --ring: #5b8dee;
+  --border: #191c38;
+  --input: #191c38;
+  --ring: #6366f1;
 
-  --radius: 0.5rem;
+  --radius: 0.625rem;
 
-  --overdue: #f59e0b;
-  --color-accent: #5b8dee;
-  --overdue-bg: #1a1000;
+  --overdue: #fb923c;
+  --color-accent: #6366f1;
+  --overdue-bg: #1c0d00;
 
-  --sidebar: #071223;
-  --sidebar-foreground: #ddeaff;
-  --sidebar-primary: #5b8dee;
+  --sidebar: #0d0f1e;
+  --sidebar-foreground: #eaecff;
+  --sidebar-primary: #6366f1;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #0d1c34;
-  --sidebar-accent-foreground: #ddeaff;
-  --sidebar-border: #0f2040;
-  --sidebar-ring: #5b8dee;
+  --sidebar-accent: #13162b;
+  --sidebar-accent-foreground: #eaecff;
+  --sidebar-border: #191c38;
+  --sidebar-ring: #6366f1;
 }
 
 .dark {

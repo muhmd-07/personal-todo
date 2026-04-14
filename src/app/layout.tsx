@@ -1,19 +1,20 @@
 import type { Metadata } from 'next'
-import { Plus_Jakarta_Sans } from 'next/font/google'
-import { Geist_Mono } from 'next/font/google'
+import { Space_Grotesk } from 'next/font/google'
+import { Fira_Code } from 'next/font/google'
 import './globals.css'
 
-const jakartaSans = Plus_Jakarta_Sans({
-  variable: '--font-jakarta',
+const spaceGrotesk = Space_Grotesk({
+  variable: '--font-space',
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800'],
+  weight: ['300', '400', '500', '600', '700'],
   display: 'swap',
 })
 
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
+const firaCode = Fira_Code({
+  variable: '--font-mono',
   subsets: ['latin'],
   weight: ['400', '500'],
+  display: 'swap',
 })
 
 export const metadata: Metadata = {
@@ -25,7 +26,7 @@ export const metadata: Metadata = {
     statusBarStyle: 'default',
     title: 'Slate',
   },
-  themeColor: '#1a2a4a',
+  themeColor: '#07080f',
 }
 
 export default function RootLayout({
@@ -34,7 +35,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${jakartaSans.variable} ${geistMono.variable} h-full antialiased`}>
+    <html lang="en" className={`${spaceGrotesk.variable} ${firaCode.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
         <a
           href="#main-content"

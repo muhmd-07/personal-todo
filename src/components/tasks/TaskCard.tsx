@@ -122,15 +122,23 @@ export function TaskCard({ task }: TaskCardProps) {
 
       {/* Content */}
       <div className="min-w-0 flex-1 pt-0.5">
-        <p
-          className={`text-sm font-medium leading-snug break-words transition-all duration-200 ${
-            completed
-              ? 'line-through text-gray-400'
-              : 'text-[var(--color-text-primary)]'
-          }`}
-        >
-          {task.title}
-        </p>
+        <div className="flex items-start gap-1.5">
+          {task.priority === 'high' && !completed && (
+            <span
+              aria-label="High priority"
+              className="mt-[3px] shrink-0 size-1.5 rounded-full bg-orange-500"
+            />
+          )}
+          <p
+            className={`text-sm font-medium leading-snug break-words transition-all duration-200 ${
+              completed
+                ? 'line-through text-gray-400'
+                : 'text-[var(--color-text-primary)]'
+            }`}
+          >
+            {task.title}
+          </p>
+        </div>
 
         {task.due_date && (
           <div className={`mt-1 flex items-center gap-1 text-xs ${

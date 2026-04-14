@@ -33,7 +33,7 @@ export default async function DashboardPage() {
               </svg>
             </div>
             <h1 className="text-[15px] font-semibold tracking-tight text-[var(--color-text-primary)]">
-              Personal Todo
+              Slate
             </h1>
           </div>
           <div className="flex items-center gap-0.5">

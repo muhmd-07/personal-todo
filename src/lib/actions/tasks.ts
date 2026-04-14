@@ -12,6 +12,7 @@ type ActionResult<T = null> =
 
 const CreateTaskSchema = z.object({
   title: z.string().min(1, 'Task title is required').max(500).trim(),
+  priority: z.enum(['high', 'normal']).optional().default('normal'),
   due_date: z.string().nullable().optional(),
   due_time: z.string().nullable().optional(),
   notes: z.string().max(5000).nullable().optional(),
@@ -44,6 +45,7 @@ export async function createTaskAction(input: unknown): Promise<ActionResult<{ i
     .insert({
       user_id: user.id,
       title: parsed.data.title,
+      priority: parsed.data.priority ?? 'normal',
       due_date: parsed.data.due_date ?? null,
       due_time: parsed.data.due_time ?? null,
       notes: parsed.data.notes ?? null,

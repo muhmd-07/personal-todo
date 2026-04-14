@@ -15,13 +15,13 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Personal Todo',
-  description: 'A minimalist task manager — capture tasks instantly, stay focused.',
+  title: 'Slate — Task management without the noise',
+  description: 'Task management without the noise. Capture tasks instantly, stay focused, ship what matters.',
   manifest: '/manifest.json',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
-    title: 'Personal Todo',
+    title: 'Slate',
   },
   themeColor: '#7c3aed',
 }

@@ -2,6 +2,7 @@ export type Task = {
   id: string
   user_id: string
   title: string
+  priority: 'high' | 'normal'
   due_date: string | null   // ISO date string YYYY-MM-DD
   due_time: string | null   // HH:MM:SS
   notes: string | null

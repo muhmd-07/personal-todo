@@ -21,8 +21,8 @@ export default function AuthLayout({
           </svg>
         </div>
         <div className="text-center">
-          <span className="text-xl font-bold tracking-tight text-[var(--color-text-primary)]">Personal Todo</span>
-          <p className="text-xs text-gray-400 mt-0.5">Stay focused. Get things done.</p>
+          <span className="text-xl font-bold tracking-tight text-[var(--color-text-primary)]">Slate</span>
+          <p className="text-xs text-gray-400 mt-0.5">Task management without the noise.</p>
         </div>
       </div>
       <div className="w-full max-w-sm rounded-3xl border border-[var(--color-border)] bg-white shadow-xl shadow-gray-100/80 p-8">

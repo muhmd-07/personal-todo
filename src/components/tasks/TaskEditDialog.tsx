@@ -38,6 +38,7 @@ export function TaskEditDialog({ task, onClose }: TaskEditDialogProps) {
     const input = {
       id: task.id,
       title: formData.get('title') as string,
+      priority: (formData.get('priority') as 'high' | 'normal') || 'normal',
       due_date: (formData.get('due_date') as string) || null,
       due_time: (formData.get('due_time') as string) || null,
       notes: (formData.get('notes') as string) || null,
@@ -109,6 +110,29 @@ export function TaskEditDialog({ task, onClose }: TaskEditDialogProps) {
               maxLength={500}
               className="w-full rounded-lg border border-[var(--color-border)] bg-white px-3 py-2 text-sm text-[var(--color-text-primary)] outline-none focus:border-[var(--color-accent)] focus:ring-2 focus:ring-[var(--color-accent)]/20 transition"
             />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-[var(--color-text-primary)] mb-1.5">
+              Priority
+            </label>
+            <div className="flex gap-2">
+              {(['normal', 'high'] as const).map((p) => (
+                <label key={p} className="flex-1 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="priority"
+                    value={p}
+                    defaultChecked={task.priority === p}
+                    className="sr-only peer"
+                  />
+                  <span className={`flex items-center justify-center gap-1.5 rounded-lg border px-3 py-2 text-xs font-medium transition peer-checked:border-[var(--color-accent)] peer-checked:bg-violet-50 peer-checked:text-[var(--color-accent)] border-[var(--color-border)] text-gray-500 hover:border-gray-300`}>
+                    {p === 'high' && <span className="size-1.5 rounded-full bg-orange-500" />}
+                    {p === 'normal' ? 'Normal' : 'High'}
+                  </span>
+                </label>
+              ))}
+            </div>
           </div>
 
           <div className="grid grid-cols-2 gap-3">

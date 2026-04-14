@@ -11,20 +11,20 @@
 ───────────────────────────────────────────────────────────────────────────── */
 
 @theme {
-  /* Colour Palette — Dark Theme */
-  --color-background: #0c0c0e;
-  --color-surface: #131316;
-  --color-surface-raised: #1c1c20;
-  --color-text-primary: #ededf0;
-  --color-text-muted: #636370;
-  --color-accent: #8b5cf6;        /* violet-500 — pops on dark */
-  --color-accent-hover: #7c3aed;
-  --color-accent-light: #2d1b69;  /* dark violet tint */
-  --color-overdue: #fbbf24;       /* amber-400 — visible on dark */
-  --color-overdue-bg: #1a1200;
-  --color-success: #8b5cf6;
-  --color-border: #26262b;
-  --color-border-strong: #3a3a42;
+  /* Colour Palette — Atlassian-inspired Dark Navy Theme */
+  --color-background: #070c18;
+  --color-surface: #0d1525;
+  --color-surface-raised: #152033;
+  --color-text-primary: #e6edff;
+  --color-text-muted: #5e7497;
+  --color-accent: #7c6af7;        /* violet — pops on dark navy */
+  --color-accent-hover: #6355e0;
+  --color-accent-light: #1e1a4a;  /* dark violet tint */
+  --color-overdue: #f59e0b;       /* amber — visible on dark */
+  --color-overdue-bg: #1a1000;
+  --color-success: #34d399;
+  --color-border: #1a2740;
+  --color-border-strong: #243650;
 
   /* Typography Scale */
   --text-xs: 0.75rem;
@@ -147,49 +147,49 @@ details[open] summary .details-chevron {
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-/* ─── Slate — Dark theme overrides for shadcn ─────────────────────────────── */
+/* ─── Slate — Dark navy theme overrides for shadcn ───────────────────────── */
 :root {
-  --background: #0c0c0e;
-  --foreground: #ededf0;
+  --background: #070c18;
+  --foreground: #e6edff;
 
-  --card: #131316;
-  --card-foreground: #ededf0;
+  --card: #0d1525;
+  --card-foreground: #e6edff;
 
-  --popover: #1c1c20;
-  --popover-foreground: #ededf0;
+  --popover: #152033;
+  --popover-foreground: #e6edff;
 
-  --primary: #8b5cf6;
+  --primary: #7c6af7;
   --primary-foreground: #ffffff;
 
-  --secondary: #1c1c20;
-  --secondary-foreground: #ededf0;
+  --secondary: #152033;
+  --secondary-foreground: #e6edff;
 
-  --muted: #1c1c20;
-  --muted-foreground: #636370;
+  --muted: #152033;
+  --muted-foreground: #5e7497;
 
-  --accent: #1c1c20;
-  --accent-foreground: #ededf0;
+  --accent: #152033;
+  --accent-foreground: #e6edff;
 
   --destructive: #ef4444;
 
-  --border: #26262b;
-  --input: #26262b;
-  --ring: #8b5cf6;
+  --border: #1a2740;
+  --input: #1a2740;
+  --ring: #7c6af7;
 
   --radius: 0.5rem;
 
-  --overdue: #fbbf24;
-  --color-accent: #8b5cf6;
-  --overdue-bg: #1a1200;
+  --overdue: #f59e0b;
+  --color-accent: #7c6af7;
+  --overdue-bg: #1a1000;
 
-  --sidebar: #131316;
-  --sidebar-foreground: #ededf0;
-  --sidebar-primary: #8b5cf6;
+  --sidebar: #0d1525;
+  --sidebar-foreground: #e6edff;
+  --sidebar-primary: #7c6af7;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #1c1c20;
-  --sidebar-accent-foreground: #ededf0;
-  --sidebar-border: #26262b;
-  --sidebar-ring: #8b5cf6;
+  --sidebar-accent: #152033;
+  --sidebar-accent-foreground: #e6edff;
+  --sidebar-border: #1a2740;
+  --sidebar-ring: #7c6af7;
 }
 
 .dark {

@@ -54,87 +54,73 @@ export function AppShell({ children, tasks = [] }: { children: React.ReactNode; 
         : 'text-[#454545] hover:text-[#c0c0c0] hover:bg-white/[0.035]'
     }`
 
+  const sideNavItem = (on: boolean) =>
+    `relative flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-semibold transition-all duration-150 ${
+      on ? 'bg-white text-black' : 'text-zinc-600 hover:text-white hover:bg-zinc-900'
+    }`
+
   return (
-    <div className="flex min-h-screen bg-[#080808]">
+    <div className="flex min-h-screen bg-black">
       <CommandPalette tasks={tasks} />
 
       {/* ── Sidebar ─────────────────────────────────────────────── */}
-      <aside className="hidden md:flex w-[220px] shrink-0 flex-col bg-[#0a0a0a] border-r border-[#181818] relative">
-        {/* Top ambient glow */}
-        <div className="pointer-events-none absolute top-0 left-0 right-0 h-32 opacity-40" style={{ background: 'radial-gradient(ellipse 100% 60% at 50% 0%, rgba(255,255,255,0.07) 0%, transparent 70%)' }} />
-        {/* Subtle vertical scan line */}
-        <div className="pointer-events-none absolute top-0 bottom-0 w-px right-0 opacity-60" style={{ background: 'linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.04) 30%, rgba(255,255,255,0.08) 60%, transparent 100%)' }} />
-
+      <aside className="hidden md:flex w-[220px] shrink-0 flex-col bg-black border-r border-zinc-900">
         {/* Logo */}
-        <div className="relative flex items-center gap-2.5 px-4 h-12 border-b border-[#181818]">
-          <div className="relative flex size-6 items-center justify-center rounded-md bg-white text-black" style={{ boxShadow: '0 0 16px rgba(255,255,255,0.25), 0 0 4px rgba(255,255,255,0.5)' }}>
+        <div className="flex items-center gap-2.5 px-5 h-14 border-b border-zinc-900">
+          <div className="flex size-6 items-center justify-center rounded-md bg-white text-black">
             <svg className="size-3.5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </div>
-          <span className="text-[14px] font-bold text-white tracking-tight">Nudge</span>
+          <span className="text-[15px] font-extrabold text-white tracking-tight">Nudge</span>
           <button
             onClick={() => window.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', metaKey: true, bubbles: true }))}
-            className="ml-auto flex items-center gap-1 rounded-md border border-white/[0.06] bg-white/[0.025] px-1.5 py-1 text-[10px] text-white/20 hover:text-white/50 hover:border-white/12 hover:bg-white/[0.04] transition-all"
+            className="ml-auto text-[10px] font-bold text-zinc-700 hover:text-zinc-400 transition-colors"
             title="Open command palette"
           >
             ⌘K
           </button>
         </div>
 
-        <nav className="flex-1 p-2 space-y-0.5 overflow-y-auto">
-          <p className="px-3 pt-2 pb-1.5 text-[9px] font-bold uppercase tracking-[0.18em] text-[#2a2a2a]">Tasks</p>
+        <nav className="flex-1 p-3 space-y-0.5 overflow-y-auto">
+          <p className="px-3 pt-3 pb-2 text-[10px] font-bold uppercase tracking-widest text-zinc-800">Tasks</p>
           {NAV_TASKS.map(item => {
             const on = activeTask(item)
             return (
-              <Link key={item.label} href={item.href} className={navItem(on)}>
-                {on && (
-                  <>
-                    <span className="absolute left-0 top-1/2 -translate-y-1/2 w-[2px] h-5 rounded-r-full bg-white/70" style={{ boxShadow: '0 0 6px rgba(255,255,255,0.5)' }} />
-                    <span className="absolute left-0 top-1/2 -translate-y-1/2 w-[2px] h-5 rounded-r-full bg-white/20 blur-sm" />
-                  </>
-                )}
-                <span className={on ? 'text-white/80' : 'text-[#383838]'}><NavIcon label={item.label} /></span>
+              <Link key={item.label} href={item.href} className={sideNavItem(on)}>
+                <span className={on ? 'text-black' : 'text-zinc-700'}><NavIcon label={item.label} /></span>
                 {item.label}
               </Link>
             )
           })}
 
-          <div className="my-3 border-t border-[#181818]" />
-          <p className="px-3 pb-1.5 text-[9px] font-bold uppercase tracking-[0.18em] text-[#2a2a2a]">Tools</p>
+          <div className="my-3 border-t border-zinc-900" />
+          <p className="px-3 pb-2 text-[10px] font-bold uppercase tracking-widest text-zinc-800">Tools</p>
 
           {NAV_TOOLS.map(item => {
             const on = pathname === item.href
             return (
-              <Link key={item.label} href={item.href} className={navItem(on)}>
-                {on && (
-                  <>
-                    <span className="absolute left-0 top-1/2 -translate-y-1/2 w-[2px] h-5 rounded-r-full bg-white/70" style={{ boxShadow: '0 0 6px rgba(255,255,255,0.5)' }} />
-                    <span className="absolute left-0 top-1/2 -translate-y-1/2 w-[2px] h-5 rounded-r-full bg-white/20 blur-sm" />
-                  </>
-                )}
-                <span className={on ? 'text-white/80' : 'text-[#383838]'}><NavIcon label={item.label} /></span>
+              <Link key={item.label} href={item.href} className={sideNavItem(on)}>
+                <span className={on ? 'text-black' : 'text-zinc-700'}><NavIcon label={item.label} /></span>
                 {item.label}
                 {item.badge && (
-                  <span className="ml-auto text-[9px] font-bold text-white/25 bg-white/[0.05] border border-white/[0.07] px-1.5 py-0.5 rounded-full">{item.badge}</span>
+                  <span className="ml-auto text-[9px] font-bold text-zinc-600 bg-zinc-900 border border-zinc-800 px-1.5 py-0.5 rounded-full">{item.badge}</span>
                 )}
               </Link>
             )
           })}
 
-          <div className="my-3 border-t border-[#181818]" />
-          <p className="px-3 pb-1.5 text-[9px] font-bold uppercase tracking-[0.18em] text-[#2a2a2a]">Account</p>
-          <Link href="/settings" className={navItem(pathname === '/settings')}>
-            {pathname === '/settings' && <span className="absolute left-0 top-1/2 -translate-y-1/2 w-[2px] h-4 rounded-r-full bg-white/60" />}
-            <span className="text-[#383838]"><NavIcon label="Settings" /></span>
+          <div className="my-3 border-t border-zinc-900" />
+          <Link href="/settings" className={sideNavItem(pathname === '/settings')}>
+            <span className={pathname === '/settings' ? 'text-black' : 'text-zinc-700'}><NavIcon label="Settings" /></span>
             Settings
           </Link>
         </nav>
 
-        <div className="p-2 border-t border-[#181818]">
+        <div className="p-3 border-t border-zinc-900">
           <form action={signOutAction}>
-            <button type="submit" className="flex w-full items-center gap-2.5 px-3 py-[7px] rounded-lg text-[13px] font-medium text-[#454545] hover:text-[#d94f4f] hover:bg-[#d94f4f]/[0.06] transition-all">
-              <svg fill="none" stroke="currentColor" strokeWidth="1.6" viewBox="0 0 24 24" className="size-[15px]">
+            <button type="submit" className="flex w-full items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-semibold text-zinc-700 hover:text-red-400 hover:bg-red-950/20 transition-all">
+              <svg fill="none" stroke="currentColor" strokeWidth="1.75" viewBox="0 0 24 24" className="size-[15px]">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" />
               </svg>
               Sign out
@@ -144,20 +130,19 @@ export function AppShell({ children, tasks = [] }: { children: React.ReactNode; 
       </aside>
 
       {/* ── Main ────────────────────────────────────────────────── */}
-      <div className="flex flex-col flex-1 min-w-0 bg-[#080808]">
+      <div className="flex flex-col flex-1 min-w-0 bg-black">
         {/* Mobile header */}
-        <header className="md:hidden flex items-center justify-between h-12 px-4 bg-[#0a0a0a] border-b border-[#181818] sticky top-0 z-10 backdrop-blur-xl">
-          <div className="flex items-center gap-2">
-            <div className="flex size-6 items-center justify-center rounded-md bg-white text-black shadow-[0_0_8px_rgba(255,255,255,0.2)]">
+        <header className="md:hidden flex items-center justify-between h-14 px-5 bg-black border-b border-zinc-900 sticky top-0 z-10 backdrop-blur-xl">
+          <div className="flex items-center gap-2.5">
+            <div className="flex size-6 items-center justify-center rounded-md bg-white text-black">
               <svg className="size-3.5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
             </div>
-            <span className="text-[14px] font-bold text-white">Nudge</span>
+            <span className="text-[15px] font-extrabold text-white">Nudge</span>
           </div>
           <button
             onClick={() => window.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', metaKey: true, bubbles: true }))}
-            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-white/[0.07] bg-white/[0.03] text-[11px] text-white/40 hover:text-white/70 transition-colors"
+            className="text-[11px] font-semibold text-zinc-600 hover:text-white transition-colors"
           >
-            <svg fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24" className="size-3"><path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" /></svg>
             Search
           </button>
         </header>
@@ -167,23 +152,21 @@ export function AppShell({ children, tasks = [] }: { children: React.ReactNode; 
         </main>
 
         {/* Mobile bottom nav */}
-        <nav className="md:hidden flex border-t border-[#181818] bg-[#0a0a0a]/95 backdrop-blur-xl sticky bottom-0 z-10">
+        <nav className="md:hidden flex border-t border-zinc-900 bg-black/95 backdrop-blur-xl sticky bottom-0 z-10">
           {[
-            { label: 'Home', href: '/dashboard' },
-            { label: 'Today', href: '/dashboard/tasks?v=today' },
+            { label: 'Home',   href: '/dashboard' },
+            { label: 'Today',  href: '/dashboard/tasks?v=today' },
             { label: 'Create', href: '/dashboard/create' },
-            { label: 'Focus', href: '/dashboard/focus' },
-            { label: 'Stats', href: '/dashboard/stats' },
+            { label: 'Focus',  href: '/dashboard/focus' },
+            { label: 'Stats',  href: '/dashboard/stats' },
           ].map(item => {
             const on = item.href === '/dashboard'
               ? pathname === '/dashboard'
               : pathname.startsWith(item.href.split('?')[0]) && (item.href.includes('?') ? v === 'today' : true)
             return (
               <Link key={item.label} href={item.href}
-                className={`flex flex-1 flex-col items-center gap-1 py-2.5 text-[9px] font-bold uppercase tracking-wide transition-all ${on ? 'text-white' : 'text-[#3a3a3a]'}`}>
-                {on && <span className="absolute top-0 w-8 h-[1px] bg-white/40 rounded-b-full" />}
+                className={`flex flex-1 flex-col items-center gap-1 py-3 text-[9px] font-bold uppercase tracking-widest transition-all ${on ? 'text-white' : 'text-zinc-800'}`}>
                 <NavIcon label={item.label === 'Focus' ? 'Focus Mode' : item.label} />
-
                 {item.label}
               </Link>
             )

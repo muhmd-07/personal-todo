@@ -21,16 +21,16 @@ function SectionDivider({
 }) {
   const labelClass =
     color === 'overdue'
-      ? 'text-[var(--color-overdue)]'
+      ? 'text-orange-400'
       : color === 'accent'
-      ? 'text-[var(--color-accent)]'
-      : 'text-[var(--color-text-muted)]'
+      ? 'text-white'
+      : 'text-zinc-600'
 
   return (
-    <div className={`flex items-center gap-2.5 ${labelClass}`}>
-      <span className="text-xs font-semibold tracking-wide">{label}</span>
-      <div className="flex-1 h-px bg-[var(--color-border)]" />
-      <span className="text-[11px] font-semibold opacity-70">{count}</span>
+    <div className={`flex items-center gap-3 ${labelClass}`}>
+      <span className="text-[10px] font-bold uppercase tracking-widest shrink-0">{label}</span>
+      <div className="flex-1 h-px bg-zinc-900" />
+      <span className="text-[10px] font-bold tabular-nums opacity-60">{count}</span>
     </div>
   )
 }
@@ -125,10 +125,10 @@ export function TaskList({ tasks, view }: TaskListProps) {
               id="completed-heading"
               className="cursor-pointer list-none mb-1 select-none"
             >
-              <div className="flex items-center gap-2.5 text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-colors">
+              <div className="flex items-center gap-3 text-zinc-600 hover:text-zinc-400 transition-colors">
                 <svg
                   aria-hidden="true"
-                  className="size-3 transition-transform group-open:rotate-90"
+                  className="size-3 transition-transform group-open:rotate-90 shrink-0"
                   fill="none"
                   stroke="currentColor"
                   strokeWidth="2.5"
@@ -136,9 +136,9 @@ export function TaskList({ tasks, view }: TaskListProps) {
                 >
                   <polyline points="9 18 15 12 9 6" />
                 </svg>
-                <span className="text-xs font-semibold tracking-wide">Completed</span>
-                <div className="flex-1 h-px bg-[var(--color-border)]" />
-                <span className="text-[11px] font-semibold opacity-70">{completedTasks.length}</span>
+                <span className="text-[10px] font-bold uppercase tracking-widest shrink-0">Completed</span>
+                <div className="flex-1 h-px bg-zinc-900" />
+                <span className="text-[10px] font-bold tabular-nums opacity-60">{completedTasks.length}</span>
               </div>
             </summary>
             <ul className="mt-1">

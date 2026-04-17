@@ -37,7 +37,7 @@ export function DashboardClient({ tasks, email }: DashboardClientProps) {
   const showProgress = completedToday + totalToday > 0
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-6">
       <TaskInput inputRef={inputRef} />
 
       {showProgress && (
@@ -50,11 +50,11 @@ export function DashboardClient({ tasks, email }: DashboardClientProps) {
                 ? 'All done for today'
                 : `${completedToday} of ${completedToday + totalToday} completed`}
             </span>
-            <span className="text-xs font-bold text-[var(--color-accent)]">{progressPct}%</span>
+            <span className="text-xs font-bold text-white/70">{progressPct}%</span>
           </div>
           <div className="h-1 w-full rounded-full bg-white/8 overflow-hidden">
             <div
-              className="h-full rounded-full bg-gradient-to-r from-violet-500 to-violet-400 transition-all duration-700"
+              className="h-full rounded-full bg-white/70 transition-all duration-700"
               style={{ width: `${progressPct}%` }}
             />
           </div>

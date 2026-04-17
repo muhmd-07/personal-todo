@@ -129,22 +129,16 @@ export function TaskCard({ task }: TaskCardProps) {
   return (
     <li
       className={`
-        task-fade-in group relative flex items-center gap-3 px-2 py-[9px] rounded-lg
-        transition-all duration-150 cursor-default overflow-hidden
+        task-fade-in group relative flex items-center gap-3 px-1 py-3
+        transition-all duration-150 cursor-default
+        border-b border-zinc-900/50 last:border-b-0
         ${isPending ? 'opacity-40 pointer-events-none' : ''}
-        ${overdue && !completed
-          ? 'hover:bg-amber-950/20'
-          : 'hover:bg-white/[0.04] hover:translate-x-[1px]'
-        }
+        hover:bg-zinc-950 rounded-lg
       `}
     >
-      {/* Hover sweep shimmer */}
-      <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 overflow-hidden rounded-lg">
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.025) 50%, transparent 100%)' }} />
-      </div>
       {/* Priority left-border accent */}
       {task.priority === 'high' && !completed && (
-        <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-5 rounded-full bg-orange-400 opacity-80" />
+        <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-5 rounded-full bg-orange-400" />
       )}
 
       {/* Checkbox */}
@@ -152,36 +146,22 @@ export function TaskCard({ task }: TaskCardProps) {
         onClick={handleToggleComplete}
         aria-label={completed ? `Mark "${task.title}" incomplete` : `Mark "${task.title}" complete`}
         className={`
-          relative flex size-[18px] shrink-0 items-center justify-center rounded-full border-2
+          relative flex size-5 shrink-0 items-center justify-center rounded-full border-2
           transition-all duration-200
           ${completed
-            ? 'border-[var(--color-accent)] bg-[var(--color-accent)]'
+            ? 'border-white bg-white'
             : overdue
-            ? 'border-amber-500/50 hover:border-amber-400 hover:bg-amber-950/30'
+            ? 'border-orange-500/50 hover:border-orange-400'
             : task.priority === 'high'
-            ? 'border-orange-500/60 hover:border-orange-400 hover:bg-orange-950/20'
-            : 'border-[var(--color-border-strong)] hover:border-white/40 hover:bg-white/[0.06]'
+            ? 'border-orange-500/60 hover:border-orange-400'
+            : 'border-zinc-700 hover:border-zinc-400'
           }
         `}
       >
         {completed && (
-          <>
-            {/* completion ring burst */}
-            <span className="absolute inset-0 rounded-full animate-ping opacity-30 bg-white" style={{ animationDuration: '0.6s', animationIterationCount: 1 }} />
-            <svg
-              aria-hidden="true"
-              className="size-2.5 text-white"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="3"
-              viewBox="0 0 24 24"
-            >
-              <polyline points="20 6 9 17 4 12" />
-            </svg>
-          </>
-        )}
-        {!completed && task.priority === 'high' && (
-          <span className="absolute inset-[-3px] rounded-full border border-orange-500/20 animate-pulse" />
+          <svg aria-hidden="true" className="size-2.5 text-black" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
         )}
       </button>
 
@@ -190,8 +170,8 @@ export function TaskCard({ task }: TaskCardProps) {
         <p
           className={`text-sm leading-snug break-words transition-all duration-200 ${
             completed
-              ? 'line-through text-[var(--color-text-muted)]'
-              : 'text-[var(--color-text-primary)] font-medium'
+              ? 'line-through text-zinc-700'
+              : 'text-white font-semibold'
           }`}
         >
           {task.title}
@@ -211,8 +191,8 @@ export function TaskCard({ task }: TaskCardProps) {
         {task.due_date && (
           <div className={`mt-0.5 flex items-center gap-1 text-xs ${
             overdue && !completed
-              ? 'text-[var(--color-overdue)] font-medium'
-              : 'text-[var(--color-text-muted)]'
+              ? 'text-orange-400 font-medium'
+              : 'text-zinc-600'
           }`}>
             {overdue && !completed ? (
               <svg aria-hidden="true" className="size-3 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">

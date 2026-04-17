@@ -82,23 +82,23 @@ export function TaskInput({ inputRef: externalRef }: TaskInputProps = {}) {
   return (
     <div className="w-full">
       <form onSubmit={handleSubmit}>
-        <div className="relative flex items-center rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] focus-within:border-white/20 focus-within:ring-2 focus-within:ring-white/[0.06] transition-all duration-200">
+        <div className="relative flex items-center border-b-2 border-zinc-800 focus-within:border-white transition-colors duration-200">
           <input
             ref={inputRef}
             type="text"
             value={value}
             onChange={handleChange}
-            placeholder="Add a task… try 'Call dentist tomorrow at 3pm'"
+            placeholder="What needs to be done?"
             aria-label="New task"
             autoComplete="off"
             spellCheck
-            className="flex-1 bg-transparent px-4 py-3.5 text-sm font-medium text-[var(--color-text-primary)] placeholder:text-[var(--color-text-muted)] placeholder:font-normal outline-none"
+            className="flex-1 bg-transparent px-0 py-4 text-xl font-semibold text-white placeholder:text-zinc-800 placeholder:font-normal outline-none"
           />
           <button
             type="submit"
             disabled={isPending || !value.trim()}
             aria-label="Add task"
-            className="mr-2 flex items-center justify-center size-8 rounded-xl bg-white text-black shadow-sm hover:bg-white/90 disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-150"
+            className="ml-3 flex items-center justify-center size-9 rounded-xl bg-white text-black hover:scale-[1.05] disabled:opacity-20 disabled:cursor-not-allowed disabled:scale-100 transition-all duration-150"
           >
             {isPending ? (
               <svg aria-hidden="true" className="size-4 animate-spin" fill="none" viewBox="0 0 24 24">

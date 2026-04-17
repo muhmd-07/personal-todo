@@ -8,9 +8,21 @@ const REMINDER_PATTERNS = [
   /\breminder\b/i,
 ]
 
+// Matches #tag patterns (e.g. #work, #personal)
+const TAG_PATTERN = /#([a-z][a-z0-9_-]*)/gi
+
+// Matches a bare ! used as a priority flag (not part of a word)
+const PRIORITY_PATTERN = /(?<![^\s])!(?![^\s])/
+
 /**
  * Parse natural-language task input into structured fields.
  * Runs entirely client-side — no network call.
+ *
+ * Supports:
+ *  - Date/time via chrono-node: "tomorrow at 3pm", "next Monday"
+ *  - Reminder intent: "remind me", "alert me"
+ *  - Tags via #hashtag: "Call dentist #health tomorrow"
+ *  - High priority via !: "Submit report ! by Friday"
  */
 export function parseTaskInput(text: string): ParsedTask {
   const trimmed = text.trim()
@@ -18,11 +30,32 @@ export function parseTaskInput(text: string): ParsedTask {
     return { title: '', dueDate: null, reminderTime: null }
   }
 
+  // ── Extract #tags ──────────────────────────────────────────────────────────
+  const tags: string[] = []
+  let tagMatch: RegExpExecArray | null
+  const tagRegex = new RegExp(TAG_PATTERN.source, 'gi')
+  while ((tagMatch = tagRegex.exec(trimmed)) !== null) {
+    const tag = tagMatch[1].toLowerCase()
+    if (!tags.includes(tag)) tags.push(tag)
+  }
+
+  // ── Extract priority flag (!) ──────────────────────────────────────────────
+  const priority: 'high' | 'normal' = PRIORITY_PATTERN.test(trimmed) ? 'high' : 'normal'
+
+  // ── Strip #tags and ! from text before chrono parsing ─────────────────────
+  let cleaned = trimmed
+    .replace(/#[a-z][a-z0-9_-]*/gi, '')
+    .replace(PRIORITY_PATTERN, '')
+    .replace(/\s{2,}/g, ' ')
+    .trim()
+  if (!cleaned) cleaned = trimmed
+
+  // ── Date parsing ───────────────────────────────────────────────────────────
   const referenceDate = new Date()
-  const results = chrono.parse(trimmed, referenceDate, { forwardDate: true })
+  const results = chrono.parse(cleaned, referenceDate, { forwardDate: true })
 
   if (results.length === 0) {
-    return { title: trimmed, dueDate: null, reminderTime: null }
+    return { title: cleaned, dueDate: null, reminderTime: null, tags, priority }
   }
 
   // Use the last result as the primary date (handles "from Monday to Wednesday" — picks Wednesday)
@@ -30,13 +63,13 @@ export function parseTaskInput(text: string): ParsedTask {
   const dueDate = primary.date()
 
   // Remove all matched date expressions from the title
-  let title = trimmed
+  let title = cleaned
   for (const result of [...results].reverse()) {
     title = (title.slice(0, result.index) + title.slice(result.index + result.text.length))
       .replace(/\s{2,}/g, ' ')
       .trim()
   }
-  if (!title) title = trimmed
+  if (!title) title = cleaned
 
   const hasReminderIntent = REMINDER_PATTERNS.some((p) => p.test(trimmed))
   const reminderTime = hasReminderIntent && primary.start.isCertain('hour') ? dueDate : null
@@ -44,7 +77,7 @@ export function parseTaskInput(text: string): ParsedTask {
   // Low confidence: chrono inferred the day but it wasn't explicitly stated
   const lowConfidence = !primary.start.isCertain('day')
 
-  return { title, dueDate, reminderTime, lowConfidence }
+  return { title, dueDate, reminderTime, lowConfidence, tags, priority }
 }
 
 /**

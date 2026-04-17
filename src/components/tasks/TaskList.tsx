@@ -1,6 +1,9 @@
+import { useState } from 'react'
 import { TaskCard } from './TaskCard'
 import { EmptyState } from './EmptyState'
 import type { Task } from '@/lib/types/task'
+
+const COMPLETED_SHOW_LIMIT = 10
 
 interface TaskListProps {
   tasks: Task[]
@@ -33,6 +36,7 @@ function SectionDivider({
 }
 
 export function TaskList({ tasks, view }: TaskListProps) {
+  const [showAllCompleted, setShowAllCompleted] = useState(false)
   const today = new Date().toLocaleDateString('en-CA')
 
   const activeTasks = tasks.filter((t) => !t.completed_at && !t.deleted_at)
@@ -138,10 +142,20 @@ export function TaskList({ tasks, view }: TaskListProps) {
               </div>
             </summary>
             <ul className="mt-1">
-              {completedTasks.map((task) => (
+              {(showAllCompleted ? completedTasks : completedTasks.slice(0, COMPLETED_SHOW_LIMIT)).map((task) => (
                 <TaskCard key={task.id} task={task} />
               ))}
             </ul>
+            {completedTasks.length > COMPLETED_SHOW_LIMIT && (
+              <button
+                onClick={() => setShowAllCompleted(s => !s)}
+                className="mt-1 w-full py-1.5 text-xs text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-colors text-center"
+              >
+                {showAllCompleted
+                  ? 'Show less'
+                  : `Show ${completedTasks.length - COMPLETED_SHOW_LIMIT} more`}
+              </button>
+            )}
           </details>
         </section>
       )}

@@ -58,6 +58,8 @@ export function TaskInput({ inputRef: externalRef }: TaskInputProps = {}) {
           ? final.dueDate.toTimeString().slice(0, 5)
           : null,
       reminder_time: final.reminderTime ? final.reminderTime.toISOString() : null,
+      tags: final.tags ?? [],
+      priority: final.priority ?? 'normal',
     }
 
     const hasDueTime = !!input.due_time || !!input.reminder_time
@@ -80,7 +82,7 @@ export function TaskInput({ inputRef: externalRef }: TaskInputProps = {}) {
   return (
     <div className="w-full">
       <form onSubmit={handleSubmit}>
-        <div className="relative flex items-center rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] focus-within:border-violet-500/60 focus-within:ring-3 focus-within:ring-violet-500/10 transition-all duration-200">
+        <div className="relative flex items-center rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] focus-within:border-white/20 focus-within:ring-2 focus-within:ring-white/[0.06] transition-all duration-200">
           <input
             ref={inputRef}
             type="text"
@@ -96,7 +98,7 @@ export function TaskInput({ inputRef: externalRef }: TaskInputProps = {}) {
             type="submit"
             disabled={isPending || !value.trim()}
             aria-label="Add task"
-            className="mr-2 flex items-center justify-center size-8 rounded-xl bg-gradient-to-br from-violet-500 to-violet-600 text-white shadow-sm hover:from-violet-400 hover:to-violet-500 disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-150"
+            className="mr-2 flex items-center justify-center size-8 rounded-xl bg-white text-black shadow-sm hover:bg-white/90 disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-150"
           >
             {isPending ? (
               <svg aria-hidden="true" className="size-4 animate-spin" fill="none" viewBox="0 0 24 24">
@@ -112,7 +114,9 @@ export function TaskInput({ inputRef: externalRef }: TaskInputProps = {}) {
           </button>
         </div>
 
-        {parsed.dueDate && <NlpPreview parsed={parsed} />}
+        {(parsed.dueDate || (parsed.tags && parsed.tags.length > 0) || parsed.priority === 'high') && (
+          <NlpPreview parsed={parsed} />
+        )}
 
         {!value && (
           <div className="mt-2 flex flex-wrap gap-1.5">
@@ -126,7 +130,7 @@ export function TaskInput({ inputRef: externalRef }: TaskInputProps = {}) {
                   debouncedParse(newVal)
                   inputRef.current?.focus()
                 }}
-                className="rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-2.5 py-1 text-xs text-[var(--color-text-muted)] hover:border-violet-500/40 hover:text-violet-400 transition"
+                className="rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-2.5 py-1 text-xs text-[var(--color-text-muted)] hover:border-white/20 hover:text-white/60 transition"
               >
                 {chip}
               </button>

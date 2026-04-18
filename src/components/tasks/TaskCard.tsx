@@ -1,6 +1,7 @@
 'use client'
 
 import { useTransition, useState, useOptimistic } from 'react'
+import Link from 'next/link'
 import {
   completeTaskAction,
   uncompleteTaskAction,
@@ -167,21 +168,27 @@ export function TaskCard({ task }: TaskCardProps) {
 
       {/* Content */}
       <div className="min-w-0 flex-1">
-        <p
-          className={`text-sm leading-snug break-words transition-all duration-200 ${
+        <Link
+          href={`/dashboard/tasks/${task.id}`}
+          className={`block text-sm leading-snug break-words transition-all duration-200 hover:opacity-80 ${
             completed
               ? 'line-through text-zinc-700'
               : 'text-white font-semibold'
           }`}
+          tabIndex={-1}
         >
           {task.title}
-        </p>
+        </Link>
 
         {/* Tags */}
         {task.tags && task.tags.length > 0 && (
-          <div className="mt-1 flex flex-wrap gap-1">
+          <div className="mt-1.5 flex flex-wrap gap-1">
             {task.tags.map(tag => (
-              <span key={tag} className="inline-flex items-center text-[10px] font-semibold px-1.5 py-0.5 rounded-full" style={{ color: tagColor(tag), background: tagColor(tag) + '18' }}>
+              <span
+                key={tag}
+                className="text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full border"
+                style={{ color: tagColor(tag), background: tagColor(tag) + '14', borderColor: tagColor(tag) + '30' }}
+              >
                 {tag}
               </span>
             ))}

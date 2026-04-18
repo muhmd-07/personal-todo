@@ -82,19 +82,27 @@ export function HomeClient({ greeting, displayName, stats, weekActivity, focusTa
             {/* Progress bar */}
             {total > 0 && (
               <div className={card}>
-                <span className={label}>Today&apos;s Progress</span>
                 <div className="flex items-center justify-between mb-3">
-                  <span className="text-sm font-semibold text-white">{done} of {total} completed</span>
-                  <span className="text-sm font-bold text-white">{pct}%</span>
+                  <span className={label} style={{ marginBottom: 0 }}>Today&apos;s Progress</span>
+                  <span className="text-2xl font-black text-white tabular-nums">{pct}%</span>
                 </div>
-                <div className="h-2 rounded-full bg-zinc-900 overflow-hidden">
+                <div className="h-1.5 rounded-full bg-zinc-900 overflow-hidden">
                   <div
-                    className="h-full rounded-full bg-white transition-all duration-700"
+                    className="h-full rounded-full bg-teal-500 transition-all duration-700"
                     style={{ width: `${pct}%` }}
                   />
                 </div>
+                <p className="text-xs text-zinc-700 mt-2">{done} of {total} completed today</p>
               </div>
             )}
+
+            {/* Motivational quote */}
+            <div className="rounded-xl border border-zinc-900 bg-zinc-950 px-5 py-4">
+              <span className="text-[9px] font-bold uppercase tracking-widest text-zinc-700 block mb-2">Deep Work</span>
+              <p className="text-sm font-semibold text-zinc-300 leading-relaxed">
+                &ldquo;Deep work is a superpower in a distracted world.&rdquo;
+              </p>
+            </div>
 
             {/* Overdue tasks */}
             {overdueTasks.length > 0 && (
@@ -113,22 +121,26 @@ export function HomeClient({ greeting, displayName, stats, weekActivity, focusTa
               </div>
             )}
 
-            {/* Today's tasks */}
+            {/* UP NEXT tasks */}
             {focusTasks.length > 0 && (
               <div className="rounded-xl border border-zinc-900 bg-zinc-950 overflow-hidden">
                 <div className="flex items-center justify-between px-5 py-3 border-b border-zinc-900">
-                  <span className={label} style={{ marginBottom: 0 }}>Today&apos;s Focus</span>
-                  <Link href="/dashboard/tasks?v=today" className="text-[11px] text-zinc-600 hover:text-white transition-colors">Manage →</Link>
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-teal-500">Up Next</span>
+                  <Link href="/dashboard/tasks?v=today" className="text-[11px] text-zinc-600 hover:text-white transition-colors">All tasks →</Link>
                 </div>
                 {focusTasks.map((t, i) => (
-                  <div key={t.id} className={`flex items-center gap-3 px-5 py-3.5 hover:bg-white/[0.02] transition-colors ${i < focusTasks.length - 1 ? 'border-b border-zinc-900/50' : ''}`}>
-                    <div className={`size-3.5 rounded-full border shrink-0 ${t.priority === 'high' ? 'border-orange-500/50' : 'border-zinc-800'}`} />
+                  <Link
+                    key={t.id}
+                    href={`/dashboard/tasks/${t.id}`}
+                    className={`flex items-center gap-3 px-5 py-3.5 hover:bg-white/[0.02] transition-colors ${i < focusTasks.length - 1 ? 'border-b border-zinc-900/50' : ''}`}
+                  >
+                    <div className={`size-3 rounded-full border shrink-0 ${t.priority === 'high' ? 'border-orange-500/50' : 'border-zinc-800'}`} />
                     <span className="text-sm text-zinc-300 flex-1 truncate">{t.title}</span>
                     {t.priority === 'high' && (
-                      <span className="text-[10px] font-bold uppercase tracking-widest text-orange-400 shrink-0">High</span>
+                      <span className="text-[9px] font-bold uppercase tracking-widest text-orange-400 shrink-0">High</span>
                     )}
                     {t.due_time && <span className="text-xs text-zinc-700 shrink-0">{t.due_time.slice(0, 5)}</span>}
-                  </div>
+                  </Link>
                 ))}
               </div>
             )}

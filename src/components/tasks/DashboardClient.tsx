@@ -54,7 +54,7 @@ export function DashboardClient({ tasks, email }: DashboardClientProps) {
           </div>
           <div className="h-1 w-full rounded-full bg-white/8 overflow-hidden">
             <div
-              className="h-full rounded-full bg-white/70 transition-all duration-700"
+              className="h-full rounded-full bg-teal-500 transition-all duration-700"
               style={{ width: `${progressPct}%` }}
             />
           </div>
